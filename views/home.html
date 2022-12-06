@@ -1,0 +1,48 @@
+<div>
+  <div class="input-container" style="margin-right: 20px; display: flex;">
+    <input type="text" style="width:16vw" placeholder="Buscar eventos..." ng-model="searchEvents"
+      ng-change="listAllEvents()" ng-model-options="{ debounce: 500 }"
+      uib-typeahead="event as event.name for event in events | filter:{name:$viewValue}"
+      typeahead-template-url="views/customTemplate.html" typeahead-on-select="refresh(listAllEvents)">
+  </div>
+  <div class="input-container" style="margin-right: 20px; display: flex;">
+    <input type="text" style="width:16vw" placeholder="Localização" ng-model="searchLocation"
+      ng-change="listLocations()" ng-model-options="{ debounce: 500 }"
+      uib-typeahead="location in locations | filter:$viewValue"
+      typeahead-template-url="views/customTemplate.html" typeahead-on-select="refresh(listLocations)">
+  </div>
+  <div>
+    <input type="date" class="el-height spacing" id="month-start">
+    <input type="date" class="el-height" id="month-end" onchange="changeDateFilter()">
+    <button class="el-height active" id="month" onclick="changeDateFilter('month'), onPageChange(1)">Mês</button>
+    <button class="el-height" id="today" onclick="changeDateFilter('today'), onPageChange(1)">Hoje</button>
+  </div>
+</div>
+<!-- 
+<div class="events-grid">
+    <div ng-repeat="event in events |orderBy: 'event.id'" style="display: flex;">
+        <img src="http://localhost:3000/image/{{event.Thumb.file_name}}" style="width: 20vh; height: 100%;">
+    </div>
+</div> -->
+
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Launch static backdrop modal
+  </button>
+  
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input>Nome
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
