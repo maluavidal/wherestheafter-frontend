@@ -1,26 +1,39 @@
-myApp.controller("homeCtrl", ['$scope', "$state", "EventService", '$location', function($scope, $state, EventService, $location) {
-    $scope.teste = 123456789
-    console.log($scope.teste);
+myApp.controller('homeCtrl', ['$scope', "$state", "EventService", '$location', function ($scope, $state, EventService, $location) {
 
     const listAllEvents = () => {
-        console.log($scope.searchEvents, 'searchEvents')
         EventService.listEvents()
-        .then(resp => {
-            $scope.events = resp.data;
-        })
-        .catch((e) => {
-            console.log(e);
-        })
-       } 
+            .then(resp => {
+                $scope.events = resp.data;
+                const locations = [];
 
-       listAllEvents()
+                $scope.events.forEach(element => {
+                    const address = element.address_city
 
-       const refresh = event => {
-        $scope.loading = false
-        $location.path(`/profile/${event.id}`)
+                    if(locations.includes(address)) return
+
+                    locations.push(address);
+                });
+
+                $scope.locations = locations;
+
+                // console.log(locations);
+            })
+            .catch((e) => {
+                console.log(e);
+            })
     }
+
+    listAllEvents()
+
+    const refresh = event => {
+        $scope.loading = false
+        $location.path(`/events/${event.id}`)
+    }
+    
+    $scope.startOfMonth = moment().startOf('month').format('YYYY-MM-DD');
+    $scope.endOfMonth   = moment().endOf('month').format('YYYY-MM-DD');
 
     $scope.refresh = refresh;
     $scope.listAllEvents = listAllEvents;
-    
+
 }]);

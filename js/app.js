@@ -10,4 +10,10 @@ myApp.config(function($stateProvider, $httpProvider) {
         templateUrl:"views/home.html", 
         controller: "homeCtrl",
         })
+        .state({
+            name:"eventPage",
+            url: "",
+            templateUrl: "views/eventPage.html",
+            controller: "eventCtrl"
+        })
 })
