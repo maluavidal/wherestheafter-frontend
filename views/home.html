@@ -6,7 +6,7 @@
       ng-model-options="{ debounce: 500 }"
       uib-typeahead="event as event.name for event in events | filter:{name:$viewValue} | limitTo: 5"
       typeahead-template-url="views/customTemplate.html" typeahead-on-select="refresh(listAllEvents)">
-
+    
     <i class="bi bi-geo-alt fa-lg" style="padding-top: 1.1vh; padding-right:5px"></i>
     <input type="text" style="width:10vw; margin-right: 3vw; border: none; border-radius: 8px;"
       placeholder="Localização" ng-model="searchLocation" ng-change="listLocations()"
@@ -31,7 +31,7 @@
 </div>
 
 <div class="events-grid">
-    <div ng-repeat="event in events |orderBy: 'event.id'" style="display: flex;">
+    <div ng-repeat="event in events | orderBy: 'event.id'" style="display: flex;">
         <img src="http://localhost:3000/image/{{event.Thumb.file_name}}" style="width: 20vh; height: 100%;">
     </div>
 </div>

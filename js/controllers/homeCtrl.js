@@ -9,14 +9,12 @@ myApp.controller('homeCtrl', ['$scope', "$state", "EventService", '$location', f
                 $scope.events.forEach(element => {
                     const address = element.address_city
 
-                    if(locations.includes(address)) return
+                    if (locations.includes(address)) return
 
                     locations.push(address);
                 });
 
                 $scope.locations = locations;
-
-                // console.log(locations);
             })
             .catch((e) => {
                 console.log(e);
