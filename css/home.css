@@ -1,9 +1,8 @@
 .events-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    grid-auto-rows: minmax(100px, auto);
-    margin: 50px;
+    margin: 5vw;
+    grid-template-columns: repeat(6, 15vw);
+    grid-auto-rows: minmax(400px, auto);
 }
 
 .image {
@@ -15,4 +14,26 @@
 .image-container {
     filter: blur(7px);
     border-bottom: solid;
+}
+
+.hover {
+    cursor: pointer;
+}
+
+.background {
+    background-image: url("../assets/poster/register-page-background-image.jpeg");
+    position: relative;
+}
+
+.container {
+    position: relative;
+    text-align: center;
+}
+
+.centered {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 75px;
 }

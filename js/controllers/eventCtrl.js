@@ -14,8 +14,6 @@ myApp.controller('eventCtrl', ['$scope', '$state', 'EventService', function ($sc
             })
     }
 
-    
     getEvent();
-
 
 }])
