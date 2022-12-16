@@ -9,10 +9,10 @@
     
     <i class="bi bi-geo-alt fa-lg" style="padding-top: 1.1vh; padding-right:5px; font-size: 24px;"></i>
     <input type="text" style="width:10vw; margin-right: 3vw; border-width: 1px;border-radius: 8px; padding-left:14px"
-      placeholder="Localização" ng-model="searchLocation" ng-change="listLocations()"
+      placeholder="Localização" ng-model="searchLocation" ng-change="listLocation()"
       ng-model-options="{ debounce: 500 }"
       uib-typeahead="location as location for location in locations | filter:$viewValue"
-      typeahead-template-url="views/customTemplate.html" typeahead-on-select="listAllEvents($item)">
+      typeahead-template-url="views/customTemplate.html" typeahead-on-select="filterLocation($item)">
 
     <div style="display: flex; margin-left: auto; margin-right: auto;">
       <input ng-model="startDate"type="date" value="{{startOfMonth}}">
@@ -21,10 +21,10 @@
         <i class="bi bi-search fa-sm"></i>
       </button>
     </div>
-
+    
     <div style="margin-left: auto; margin-right: 0; align-self: center;">
       <a ui-sref="registerPage" style="text-decoration: none; align-self: center; font-size: 12px; padding-left: 20px;">SEJA UM PRODUTOR</a>
-      <a href="" style="text-decoration: none; align-self: center; font-size: 12px; padding-left: 20px;">ACESSE SUA CONTA</a>
+      <a ui-sref="loginPage" style="text-decoration: none; align-self: center; font-size: 12px; padding-left: 20px;">ACESSE SUA CONTA</a>
     </div>
   </div>
 
@@ -35,25 +35,3 @@
         <img class="hover" src="http://localhost:3000/image/{{event.Thumb.file_name}}" style="width: 30vh; height: 32vh; object-fit: cover; border-radius:20px;" ng-click="refresh(event)">
     </div>
 </div>
-
-<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    SEJA UM PRODUTOR
-  </button>
-  
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <input>Nome
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
-        </div>
-      </div>
-    </div>
-  </div>

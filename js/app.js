@@ -22,4 +22,16 @@ myApp.config(function ($stateProvider, $httpProvider) {
             templateUrl: "views/registerPage.html",
             controller: "userCtrl",
         })
+        .state({
+            name: "loginPage",
+            url: "/session",
+            templateUrl: "views/loginPage.html",
+            controller: "sessionCtrl",
+        })
+        .state({
+            name: "producerPage",
+            url: "/producer",
+            templateUrl: "views/producerPage.html",
+            controller: "producerCtrl"
+        })
 })

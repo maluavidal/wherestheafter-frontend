@@ -1,24 +1,35 @@
-<div style="position: absolute; display: flex;">
-    <div style="background-color: black;">
-        <img src="../assets/poster/register-page-background-image.jpeg"
-            style="width: 100vw; height: 100vh; object-fit: cover; opacity: 60%; position: relative;">
-        <div class="centered" style="position: absolute; top: 20%;">SEJA UM PRODUTOR</div>
-    </div>
-    <div style="margin-left: auto; margin-right: auto; position: relative;">
+<div style="height: 100vh; display: flex; align-items: center; justify-content: center; background-image: url('../assets/poster/register-page-background-image.jpeg'); background-repeat: no-repeat; background-size: cover;">
+    <div style=" display: flex; flex-direction: column; align-items: center;">
+        <div class="centered">SEJA UM PRODUTOR</div>
         <form
-            style="width: 20vw; background-color: rgba(194, 194, 194, 0.321); padding: 30px; border: solid 3px rgba(4, 3, 3, 0.701); position: absolute; margin-left: -60vw; margin-top: 30vh; border-radius: 5%">
+            style="width: 20vw; background-color: rgba(194, 194, 194, 0.321); padding: 30px; border: solid 3px rgba(4, 3, 3, 0.758); border-radius: 5%">
             <div>
-                <label for="exampleInputEmail1" style="justify-content: left; color: white;"></label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"
-                    style="margin-bottom: 20px; border: solid 2px rgba(0, 0, 0, 0.486);">
+                <label style="color: white;"></label>
+                <input class="form-control" placeholder="Nome"
+                    style="margin-bottom: 3px; border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="userData.name" ng-required="true" ng-minlength="2">
+            </div>
+            <div>
+                <label style="color: white;"></label>
+                <input class="form-control" placeholder="Sobrenome"
+                    style="margin-bottom: 3px; border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="userData.surname" ng-required="true" ng-minlength="2">
+            </div>
+            <div>
+                <label for="exampleInputEmail1" style="color: white;"></label>
+                <input type="email" class="form-control" placeholder="Email"
+                    style="margin-bottom: 3px; border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="userData.email" ng-required="true" ng-minlength="10">
             </div>
             <div>
                 <label for="exampleInputPassword1" style="color: white;"></label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha"
-                    style="margin-bottom: 20px; border: solid 2px rgba(0, 0, 0, 0.486);">
+                <input type="password" class="form-control" placeholder="Senha"
+                    style="margin-bottom: 3px; border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="userData.password" ng-required="true" ng-minlength="8">
+            </div>
+            <div>
+                <label style="color: white;"></label>
+                <input type="password" class="form-control" placeholder="Confirmar senha"
+                    style="margin-bottom: 20px; border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="userData.confirmPassword" ng-required="true" ng-minlength="2">
             </div>
             <div style="text-align: center;">
-                <button type="submit" class="btn" style="margin-bottom: 10px; background-color: rgba(0, 0, 0, 0.686); border: solid 2px black; color: white;">Cadastrar</button>
+                <button type="button" ng-click="registerUser()">Cadastrar</button>
             </div>
         </form>
     </div>

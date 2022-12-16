@@ -1,5 +1,23 @@
-myApp.controller('userCtrl', ['$scope', '$state', 'UserService'], function ($scope, $state, UserService){
-    $scope.teste = 12345
+myApp.controller('userCtrl', ['$scope', '$state', 'UserService', function ($scope, $state, UserService) {
 
-    console.log($scope.teste) 
-})
+    $scope.userData = {
+        name: '',
+        surname: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+    }
+
+    const registerUser = () => {
+        console.log('afisj');
+        UserService.createUser($scope.userData)
+            .then(() => {
+                $state.go('loginPage');
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+    }
+
+    $scope.registerUser = registerUser
+}])

@@ -1,20 +1,15 @@
 myApp.controller('homeCtrl', ['$scope', "$state", "EventService", '$location', function ($scope, $state, EventService, $location) {
 
+    const init = () => {
+        listAllEvents(),
+            listCities()
+    };
+
     const listAllEvents = filter => {
+        console.log(filter)
         EventService.listEvents(filter)
             .then(resp => {
                 $scope.events = resp.data;
-                const locations = [];
-
-                $scope.events.forEach(element => {
-                    const address = element.address_city
-
-                    if (locations.includes(address)) return
-
-                    locations.push(address);
-                });
-
-                $scope.locations = locations;
             })
             .catch((e) => {
                 console.log(e);
@@ -25,23 +20,39 @@ myApp.controller('homeCtrl', ['$scope', "$state", "EventService", '$location', f
         $scope.loading = false
         $location.path(`/events/${event.id}`)
     }
-    
+
     const changeDate = () => {
-        const filter ={
-            start_date: moment($scope.startDate).startOf('hour').format('YYYY-MM-DD'),
-            end_date: moment($scope.endDate).startOf('hour').format('YYYY-MM-DD')
+        const filter = {
+            starts_at: moment($scope.startDate).startOf('day').format('YYYY-MM-DD'),
+            ends_at: moment($scope.endDate).startOf('day').format('YYYY-MM-DD')
         }
-    
         listAllEvents(filter);
     }
-    
-    changeDate();
 
-    $scope.startOfMonth = moment().startOf('month').format('YYYY-MM-DD');
-    $scope.endOfMonth = moment().endOf('month').format('YYYY-MM-DD');
+    const filterLocation = location => {
+        const filter = {
+            city: location
+        }
+
+        listAllEvents(filter);
+    }
+
+    const listCities = () => {
+        EventService.getCities()
+            .then(resp => {
+                $scope.locations = resp.data;
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+    }
+
+    init()
 
     $scope.refresh = refresh;
     $scope.listAllEvents = listAllEvents;
     $scope.changeDate = changeDate;
+    $scope.filterLocation = filterLocation;
+    $scope.listCities = listCities;
 
 }]);

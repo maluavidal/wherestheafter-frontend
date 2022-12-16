@@ -1,10 +1,9 @@
 myApp.service("EventService", function ($http) {
-  this.listEvents = (filter) => { 
-    if (filter.id) {
-      return $http.get(`${baseUrl}events/?city=${filter}`)
-    } else {
-      return $http.get(`${baseUrl}events?start_at=${filter.start_date}&end_date=${filter.end_date}`)
-    }
+  this.listEvents = filter => {
+    return $http.get(`${baseUrl}events/`, { params: filter })
+  }
+  this.getCities = () => {
+    return $http.get(`${baseUrl}events/cities`)
   }
   this.createEvent = (data) => {
     return $http.post(`${baseUrl}events/`, data)
