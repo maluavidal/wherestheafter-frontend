@@ -16,4 +16,7 @@ myApp.service("UserService", function ($http) {
     this.updateUser = (UserId, data) => {
        return $http.put(`${baseUrl}users/${UserId}`, data);
     }
+    this.profile = () => {
+      return $http.get(`${baseUrl}users/profile`)
+    }
   });

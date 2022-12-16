@@ -16,7 +16,8 @@ myApp.controller('sessionCtrl', ['$scope', '$state', 'SessionService', function 
             $state.go(`producerPage`)
         })   
         .catch((err) => {
-            // alert()
+            console.log(err);
+            alert('Usuário inválido')
         })
     }
 

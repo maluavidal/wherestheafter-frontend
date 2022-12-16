@@ -2,6 +2,7 @@ const myApp = angular.module("ticket", ['ui.router', 'ui.bootstrap']);
 const baseUrl = 'http://localhost:3000/';
 
 myApp.config(function ($stateProvider, $httpProvider) {
+    $httpProvider.interceptors.push('BearerAuthInterceptor');
 
     $stateProvider
         .state({

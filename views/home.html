@@ -2,9 +2,10 @@
   <div class="input-container" style="display: flex;">
     <i class="bi bi-search fa-sm" style="padding-top: 1.1vh; padding-right:5px; font-size: 24px;"></i>
     <input type="text" style="width:16vw; margin-right: 3vw; padding: 10px; border-radius: 8px; border-width: 1px;"
-      placeholder="Buscar eventos..." ng-model="searchEvents" ng-change="listAllEvents()"
-      ng-model-options="{ debounce: 500 }"
-      uib-typeahead="event as event.name for event in events | filter:{name:$viewValue} | limitTo: 5"
+      placeholder="Buscar eventos..." ng-model="searchEvents"
+      typeahead-wait-ms="500"
+      typeahead-min-length="2"
+      uib-typeahead="event for event in listAllEvents($viewValue)"
       typeahead-template-url="views/customTemplate.html" typeahead-on-select="refresh($item)">
     
     <i class="bi bi-geo-alt fa-lg" style="padding-top: 1.1vh; padding-right:5px; font-size: 24px;"></i>

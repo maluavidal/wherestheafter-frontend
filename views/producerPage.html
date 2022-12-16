@@ -1,5 +1,46 @@
 <div>
-    <nav style="margin:20px">
-        <button style="color: white; background-color: rgb(0, 94, 255); border-radius: 20px; font-size: 11px; height: 25px; width: 115px;">MEUS EVENTOS</button>
-    </nav>
+
+    <div style="padding: 50px; border: solid 10px lightgray;">
+        <table class="table">
+            <thead style="font-size: 13px;">
+                <tr>
+                    <th>STATUS</th>
+                    <th>
+                        <i class="fa-solid fa-sort" ng-click="orderEvents()"></i>
+                        <span>EVENTO</span>
+                    </th>
+                    <th>
+                        <i class="fa-solid fa-sort" ng-click="orderDates()"></i>
+                        <span>DATA</span>
+                    </th>
+                    <th>
+                        <i class="fa-solid fa-sort" ng-click="orderLocations()"></i>
+                        <span>LOCAL</span>
+                    </th>
+                    <th>ESPAÇO</th>
+                    <th>INGRESSOS</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="usersEvent in usersEvents">
+                    <td style="color: black;">{{usersEvent.deleted_at}}</td>
+                    <td> <input ng-model="usersEvent.name" ng-readonly="!usersEvent.enable_edit" style="border: none; text-overflow: ellipsis;"></td>
+                    <td> <input ng-model="usersEvent.state" ng-readonly="!usersEvent.enable_edit" style="border: none;"></td>
+                    <td> <input ng-model="usersEvent.starts_at" ng-readonly="!usersEvent.enable_edit" style="border: none;"></td>
+                    <td> <input ng-model="usersEvent.venue" ng-readonly="!usersEvent.enable_edit" style="border: none; text-overflow: ellipsis;"></td>
+                    <td> <input ng-readonly="!usersEvent.enable_edit" style="border: none;"></td>
+                    <td style="display: flex; justify-content: center;" ng-hide="usersEvent.check">
+                        <button
+                            style="border: none; background-color: white; font-size: 18px;"
+                            ng-click="enableEdit(usersEvent)" >
+                            <i class="bi bi-pencil-square"></i>
+                    </td>
+                    <td><i class="bi bi-check-circle-fill" style="font-size: 18px; color:green; cursor: pointer;" ng-click="updateEvent(usersEvent)" class="check-element animate-show-hide" ng-show="usersEvent.check" title="Salvar alterações"></i></td>
+                    <td><i class="bi bi-trash3-fill" style="font-size: 18px; color:black; cursor: pointer;" ng-click="deleteEvent(usersEvent.id)" class="check-element animate-show-hide" ng-show="usersEvent.check"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

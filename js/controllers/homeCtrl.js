@@ -5,15 +5,14 @@ myApp.controller('homeCtrl', ['$scope', "$state", "EventService", '$location', f
             listCities()
     };
 
-    const listAllEvents = filter => {
-        console.log(filter)
-        EventService.listEvents(filter)
-            .then(resp => {
-                $scope.events = resp.data;
-            })
-            .catch((e) => {
-                console.log(e);
-            })
+    const listAllEvents = searchText => {
+        EventService.listEvents({
+            name: searchText
+        }).then(resp => {
+            $scope.events = resp.data;
+        }).catch((e) => {
+            console.log(e);
+        })
     }
 
     const refresh = event => {
