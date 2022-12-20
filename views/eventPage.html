@@ -1,18 +1,44 @@
 <div>
     <div>
-        <div class="image-container" style="width: 100vw; position: absolute; width: 120%; margin-left: -5%; margin-top: -5%;">
+        <div class="image-container"
+            style="width: 100vw; position: absolute; width: 120%; margin-left: -5%; margin-top: -5%;">
             <img class="image" src="http://localhost:3000/image/{{event.Thumb.file_name}}">
         </div>
         <div class="d-flex flex-column mt-2">
             <div style="display: flex; justify-content:center">
-                <img src="http://localhost:3000/image/{{event.Thumb.file_name}}" style="width: 70vh; height: 623px; object-fit: cover; border-radius: 15px; position: relative; ">
+                <img src="http://localhost:3000/image/{{event.Thumb.file_name}}"
+                    style="width: 70vh; height: 623px; object-fit: cover; border-radius: 15px; position: relative; ">
             </div>
-            <div style="text-align: center;">
+            <div style="text-align: center; margin-bottom: 30px;">
                 <div style="font-weight: bold; font-size: 30px; margin-bottom: 15px;">{{event.name}}</div>
                 <i class="bi bi-calendar-event" style="margin-right: 10px;"></i>
                 {{datetimeStart}} > {{datetimeEnd}}</br>
                 <i class="bi bi-geo-alt fa-lg" style="padding-top: 1.1vh; padding-right:5px"></i>
                 Evento em {{event.venue}} - {{event.street}}, {{event.number}}, {{event.city}} - {{event.state}}
+            </div>
+        </div>
+        <div style="display: flex; flex-direction: row; margin: auto; align-items: center; width: 35.5vw; justify-content: space-between;">
+            <div style="width: 20vw;">
+                {{event.about}}
+            </div>
+            <div style="width: 12vw;">
+                <div
+                    style="background-color: black; color: white; text-transform: uppercase; display: flex; align-items: center; justify-content: center; padding: 1rem; width: 100%; height: 4vh;">
+                    Ingressos
+                </div>
+                <div>
+                        <div style="font-weight:lighter; font-size: 15px;">
+                            <h5 style="margin-top: .5vh;">LOTE ÚNICO</h5>
+                            {{event.price | currency:"R$"}}
+                            <p style="font-style: italic; font-size: 11px;">Vendas até {{dateStart}}</p>
+                        </div>
+                        <div style=" display: flex; flex-direction: column;">
+                            <button style="background-color: rgb(39, 211, 39); padding: 10px; border-radius: 10px; border: none; color: white;"
+                                    ui-sref="checkout({eventId: event.id})">
+                                    COMPRAR INGRESSOS
+                            </button>
+                        </div>
+                </div>
             </div>
         </div>
     </div>

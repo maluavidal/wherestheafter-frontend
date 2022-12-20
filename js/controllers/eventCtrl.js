@@ -8,6 +8,7 @@ myApp.controller('eventCtrl', ['$scope', '$state', 'EventService', function ($sc
                 $scope.event = resp.data
                 $scope.datetimeStart = moment($scope.event.starts_at).locale('pt-BR').format("D MMM [-] YYYY [•] HH:mm");
                 $scope.datetimeEnd = moment($scope.event.ends_at).locale('pt-BR').format("D MMM [-] YYYY [•] HH:mm");
+                $scope.dateStart = moment($scope.event.starts_at).format("DD/MM/YYYY");
             })
             .catch((e) => {
                 console.log(e);

@@ -35,4 +35,22 @@ myApp.config(function ($stateProvider, $httpProvider) {
             templateUrl: "views/producerPage.html",
             controller: "producerCtrl"
         })
+        .state({
+            name: "checkout",
+            url: "/eventsclient/{eventId}",
+            templateUrl: "views/checkout.html",
+            controller: "checkoutCtrl"
+        })
+        .state({
+            name: "createEvent",
+            url: "/events",
+            templateUrl: "views/createEvent.html",
+            controller: 'createEventCtrl'
+        })
+        .state({
+            name: "recoverPassword",
+            url: "recover-password",
+            templateUrl: "views/recoverPassword.html",
+            controller: "recoverPasswordCtrl"
+        })
 })

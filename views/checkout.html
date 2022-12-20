@@ -1,0 +1,90 @@
+<div>
+    <nav style="background-color: black; color: white;">
+        nav
+    </nav>
+    <h1 style="margin-top: 3rem; margin-left: 3vw; font-weight: bold;">Primeiro passo:</h1>
+    <div>
+
+    </div>
+
+    <div style="text-align: left; margin-bottom: 30px; margin-left: 20vw; margin-top: 7vh; margin-right: 20vw; display: flex; flex-direction: column;">
+        <div class="d-flex justify-content-between">
+            <div>
+                <div style="font-weight: bold; font-size: 30px; margin-bottom: 15px;">{{event.name}}</div>
+                <i class="bi bi-calendar-event" style="margin-right: 10px;"></i>
+                {{datetimeStart}} > {{datetimeEnd}}</br>
+                <i class="bi bi-geo-alt fa-lg" style="padding-top: 1.1vh; padding-right:5px"></i>
+                Evento em {{event.venue}} - {{event.street}}, {{event.number}}, {{event.city}} - {{event.state}}
+            </div>
+
+            <div style="display: flex; flex-direction: column;">
+                <div style="background-color: black; color: white; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+                    Ingressos
+                </div>
+                <div>
+                    <tr>
+                        <td style="font-weight:lighter; font-size: 15px;">LOTE ÚNICO<br>{{event.price | currency:
+                            "R$"}}<br>
+                            <p style="font-style: italic; font-size: 11px;">Vendas até {{dateStart}}</p>
+                        <td>
+                    </tr>
+                </div>
+            </div>
+
+        </div>
+        <form style="text-align: left; margin-bottom: 30px; margin-top: 7vh;">
+            <label>Nome *</label>
+            <input type="text" class="form-control" style="width: 25vw; margin-bottom: 30px;" ng-model="clientData.name">
+            <label>CPF *</label>
+            <input type="text" class="form-control" style="width: 25vw; margin-bottom: 30px;" ng-model="clientData.cpf">
+            <label>Email *</label>
+            <input type="email" class="form-control" style="width: 25vw; margin-bottom: 30px;" ng-model="clientData.email">
+            <label>Data de nascimento *</label>
+            <input type="date" class="form-control" style="width: 25vw; margin-bottom: 30px;" ng-model="clientData.born_at">
+        </form>
+    </div>
+
+    <div>
+        <h1 style="margin-top: 7vh; margin-left: 3vw; font-weight: bold;">Segundo passo:</h1>
+        <div style="text-align: left; margin-bottom: 30px; margin-top: 7vh; margin-left: 20vw; margin-right: 20vw;"> 
+            <select class="form-control" style="width: 20vw;  margin-bottom: 3vh;" ng-change="changevalue()" ng-model="method" ng-options="paymentMethod.name + ' (' + (paymentMethod.type) + ')' for paymentMethod in paymentMethods">
+                <option value="">Selecione um método de pagamento</option>
+            </select>
+            <div>
+                <h5 style="margin-bottom: 3vh;">Informações de pagamento:</h5>
+                <div style="display: flex; justify-content: space-between; font-size: 13px;"> 
+                    <div style="display: flex; flex-direction: column;">
+                        <label>Número do cartão</label>
+                        <input placeholder="0000 0000 0000 0000" ng-model="cardNumber" card-number class="form-control" type="text" style="width: 18vw;" ng-max-length="16">
+                    </div>
+                    <div style="display: flex; flex-direction: column; ">
+                        <label>Data de validade</label>
+                        <input placeholder="MM/AA" class="form-control" type="text" style="width: 18vw;">
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <label>Código de segurança</label>
+                        <input placeholder="000" class="form-control" type="text" style="width: 18vw;">
+                    </div>
+                </div>
+                <div>
+                    <h5 style="margin-bottom: 3vh; margin-top: 5vh;">Dados do titular do cartão:</h5>
+                    <div style="display: flex; justify-content: space-between; font-size: 13px;"> 
+                        <div style="display: flex; flex-direction: column;">
+                            <label>Nome impresso no cartão</label>
+                            <input class="form-control" type="text" style="width: 18vw;">
+                        </div>
+                        <div style="display: flex; flex-direction: column; ">
+                            <label>Data de nascimento</label>
+                            <input class="form-control" type="date" style="width: 18vw;">
+                        </div>
+                        <div style="display: flex; flex-direction: column;">
+                            <label>CPF</label>
+                            <input class="form-control" type="text" style="width: 18vw;">
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

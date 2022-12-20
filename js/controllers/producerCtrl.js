@@ -1,8 +1,8 @@
-myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventService', function ($scope, $state, UserService, EventService) {
+myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventService', 'AlertMessage', function ($scope, $state, UserService, EventService, AlertMessage) {
+    
     const profile = () => {
         UserService.profile()
         .then(resp => {
-            console.log(resp.data);
                 $scope.usersEvents = resp.data.map(usersEvent => {
                     if (!usersEvent.deleted_at) {
                         usersEvent.deleted_at = 'Ativo';
@@ -14,7 +14,6 @@ myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventServi
                         usersEvent.starts_at = moment(usersEvent.starts_at, 'YYYY-MM-DD HH:mm:ss').format("DD/MM/YYYY HH:mm");
                     }
                     
-                    console.log(usersEvent);
                     return usersEvent;
                 })
             
@@ -25,7 +24,7 @@ myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventServi
     }
 
     const enableEdit = usersEvent => {
-        console.log(usersEvent);
+        console.log(usersEvent)
         $scope.usersEvents = $scope.usersEvents.map(user => {
             if (user.id === usersEvent.id) {
                 user.enable_edit = !user.enable_edit;
@@ -43,11 +42,10 @@ myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventServi
             starts_at: moment(data.starts_at, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm')
         };
 
-        console.log(eventDataToUpdate, 'eventDataToUpdate')
 
         return EventService.updateEvent(data.id, eventDataToUpdate)
         .then(() => {
-            $state.go('profile')
+            data.check = false
         })
         .catch((e) => {
             Swal.fire({
@@ -59,7 +57,26 @@ myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventServi
               })
         })    }
 
-    const deleteEvent = (usersEvent) => {
+    const deleteEvent = async (usersEvent) => {
+        const confirmation = await Swal.fire({
+            title: 'Tem certeza que dejesa excluir esse evento?',
+            text: "Os dados desse evento serão apagados!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Excluir',
+            cancelButtonText: "Cancelar",
+          });
+
+          if (confirmation.isConfirmed) {
+            AlertMessage.success("Evento excluido!")
+          }
+          
+          if (!confirmation.isConfirmed) {
+            return;
+          }
+
         return EventService.deleteEvent(usersEvent)
         .then(() => {
             $state.go('profile')

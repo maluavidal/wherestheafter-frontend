@@ -1,4 +1,7 @@
 <div>
+    <div>
+        <button ui-sref="createEvent" class="btn btn-primary">Criar evento</button>
+    </div>
 
     <div style="padding: 50px; border: solid 10px lightgray;">
         <table class="table">
@@ -15,7 +18,7 @@
                     </th>
                     <th>
                         <i class="fa-solid fa-sort" ng-click="orderLocations()"></i>
-                        <span>LOCAL</span>
+                        <span>LOCAL E HORA</span>
                     </th>
                     <th>ESPAÇO</th>
                     <th>INGRESSOS</th>
@@ -26,19 +29,26 @@
             <tbody>
                 <tr ng-repeat="usersEvent in usersEvents">
                     <td style="color: black;">{{usersEvent.deleted_at}}</td>
-                    <td> <input ng-model="usersEvent.name" ng-readonly="!usersEvent.enable_edit" style="border: none; text-overflow: ellipsis;"></td>
-                    <td> <input ng-model="usersEvent.state" ng-readonly="!usersEvent.enable_edit" style="border: none;"></td>
-                    <td> <input ng-model="usersEvent.starts_at" ng-readonly="!usersEvent.enable_edit" style="border: none;"></td>
-                    <td> <input ng-model="usersEvent.venue" ng-readonly="!usersEvent.enable_edit" style="border: none; text-overflow: ellipsis;"></td>
+                    <td> <input ng-model="usersEvent.name" ng-readonly="!usersEvent.enable_edit"
+                            style="border: none; text-overflow: ellipsis;"></td>
+                    <td> <input ng-model="usersEvent.state" ng-readonly="!usersEvent.enable_edit" style="border: none;">
+                    </td>
+                    <td> <input ng-model="usersEvent.starts_at" ng-readonly="!usersEvent.enable_edit"
+                            style="border: none;"></td>
+                    <td> <input ng-model="usersEvent.venue" ng-readonly="!usersEvent.enable_edit"
+                            style="border: none; text-overflow: ellipsis;"></td>
                     <td> <input ng-readonly="!usersEvent.enable_edit" style="border: none;"></td>
                     <td style="display: flex; justify-content: center;" ng-hide="usersEvent.check">
-                        <button
-                            style="border: none; background-color: white; font-size: 18px;"
-                            ng-click="enableEdit(usersEvent)" >
+                        <button style="border: none; background-color: white; font-size: 18px;"
+                            ng-click="enableEdit(usersEvent)">
                             <i class="bi bi-pencil-square"></i>
                     </td>
-                    <td><i class="bi bi-check-circle-fill" style="font-size: 18px; color:green; cursor: pointer;" ng-click="updateEvent(usersEvent)" class="check-element animate-show-hide" ng-show="usersEvent.check" title="Salvar alterações"></i></td>
-                    <td><i class="bi bi-trash3-fill" style="font-size: 18px; color:black; cursor: pointer;" ng-click="deleteEvent(usersEvent.id)" class="check-element animate-show-hide" ng-show="usersEvent.check"></i></td>
+                    <td><i class="bi bi-check-circle-fill" style="font-size: 18px; color:green; cursor: pointer;"
+                            ng-click="updateEvent(usersEvent)" class="check-element animate-show-hide"
+                            ng-show="usersEvent.check" title="Salvar alterações"></i></td>
+                    <td><i class="bi bi-trash3-fill" style="font-size: 18px; color:black; cursor: pointer;"
+                            ng-click="deleteEvent(usersEvent.id)" class="check-element animate-show-hide"
+                            ng-show="usersEvent.check && usersEvent.deleted_at === 'Ativo'"></i></td>
                 </tr>
             </tbody>
         </table>

@@ -1,0 +1,82 @@
+<div style="padding: 100px;">
+    <h5 style="margin-bottom: 2rem;">Informações do evento:</h5>
+
+    <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 3rem;">
+        <div style="display: flex; justify-content: space-between; width: 100%; padding: 2rem; border-radius: 20px; border: 1px solid black;">
+            <div style="display: flex; flex-direction: column; justify-content: space-between;">
+                <label>Nome do evento</label>
+                <input ng-model="event.name" class="form-control" type="text" style="width: 18rem;" ng-max-length="16" ng-required="required">
+            </div>
+            <div style="display: flex; flex-direction: column; ">
+                <label>Descrição</label>
+                <input ng-model="event.about" class="form-control" type="text" style="width: 18rem;">
+            </div>
+
+            <div style="display: flex; flex-direction: column;">
+                <label>Idade mínima</label>
+                <input ng-model="event.min_age" class="form-control" type="number" style="width: 18rem;">
+            </div>
+            <div style="display: flex; flex-direction: column;">
+                <label>Preço</label>
+                <input ng-model="event.price" class="form-control" type="text" style="width: 18rem;">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="d-flex" style="gap: 3rem; font-size: 13px;">
+        <div style="border: solid 1px black; border-radius: 20px; padding: 30px; width: 100%; flex-direction: row;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 3vh;">
+                <div style="display: flex; flex-direction: column;">
+                    <label>CEP</label>
+                    <input ng-blur="getAddressByCep()" ng-model="event.cep" class="form-control" type="text" style="width: 18rem;">
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <label>Estado</label>
+                    <input ng-model="event.state" class="form-control" type="text" style="width: 18rem;">
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <label>Cidade</label>
+                    <input ng-model="event.city" class="form-control" type="text" style="width: 18rem;">
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                <div style="display: flex; flex-direction: column;">
+                    <label>Local</label>
+                    <input ng-model="venue" class="form-control" type="text" style="width: 18rem;">
+                </div>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label>Rua</label>
+                    <input ng-model="event.street" class="form-control" type="text" style="width: 18rem;">
+                </div>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label>Número</label>
+                    <input ng-model="number" ng-model="event.number" class="form-control" type="number" style="width: 18rem;">
+                </div>
+            </div>
+
+        </div>
+
+        <div style="display: flex; flex-direction: row;">
+            <div
+                style="display: flex; flex-direction: column; border: solid 1px black; border-radius: 20px; padding: 2rem; width: 25.5rem; justify-content: space-between;">
+                <label>Data (início)</label>
+                <input ng-model="event.starts_at" class="form-control" type="datetime-local"
+                    style="width: 21.5rem; margin-bottom: 2rem">
+                <label>Data (fim)</label>
+                <input ng-model="event.ends_at" class="form-control" type="datetime-local" style="width: 21.5rem;">
+            </div>
+
+        </div>
+    </div>
+    <input style="margin-top: 2rem; font-size: 13px;" class="form-control form-control-lg"  type="file" id="file" name="file">
+
+
+        <div style="margin: auto; display: flex; flex-direction: column; width: 10rem; margin-top: 3rem;">
+            <button ng-click="createEvent()" class="btn btn-primary">Criar evento</button>
+        </div>
+
+</div>

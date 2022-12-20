@@ -9,11 +9,6 @@
                     style="margin-bottom: 3px; border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="userData.name" ng-required="true" ng-minlength="2">
             </div>
             <div>
-                <label style="color: white;"></label>
-                <input class="form-control" placeholder="Sobrenome"
-                    style="margin-bottom: 3px; border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="userData.surname" ng-required="true" ng-minlength="2">
-            </div>
-            <div>
                 <label for="exampleInputEmail1" style="color: white;"></label>
                 <input type="email" class="form-control" placeholder="Email"
                     style="margin-bottom: 3px; border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="userData.email" ng-required="true" ng-minlength="10">
@@ -29,7 +24,7 @@
                     style="margin-bottom: 20px; border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="userData.confirmPassword" ng-required="true" ng-minlength="2">
             </div>
             <div style="text-align: center;">
-                <button type="button" ng-click="registerUser()">Cadastrar</button>
+                <button type="button" class="btn" style="border: solid 2px rgba(255, 255, 255, 0.521); color: white; background-color:rgba(0, 0, 0, 0.944)" ng-click="registerUser()">Cadastrar</button>
             </div>
         </form>
     </div>

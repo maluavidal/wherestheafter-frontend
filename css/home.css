@@ -40,3 +40,8 @@
 .activeButton:active {
 background-color: rgb(0, 94, 255); 
 }
+
+.input-checkout {
+    width: 25vw;
+    margin-bottom: 15px;
+}

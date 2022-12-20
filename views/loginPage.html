@@ -1,12 +1,12 @@
 <div
     style="height: 100vh; display: flex; align-items: center; justify-content: center; background-image: url('../assets/poster/register-page-background-image.jpeg'); background-repeat: no-repeat; background-size: cover;">
     <div style=" display: flex; flex-direction: column; align-items: center;">
-        <form style="width: 20vw; background-color: rgba(194, 194, 194, 0.321); padding: 30px; border: solid 3px rgba(4, 3, 3, 0.758); border-radius: 5%">
+        <form style="width: 20vw; background-color: rgba(16, 16, 16, 0.76); padding: 30px; border: solid 3px rgba(4, 3, 3, 0.758); border-radius: 5%">
             <h2 style="color: white; text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Login</h2>
             <div>
                 <label for="exampleInputEmail1" style="color: white;"></label>
                 <input type="email" class="form-control" placeholder="Email"
-                    style="margin-bottom: 3px; border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="loginData.email"
+                    style="margin-bottom: 3px; border: solid 2px rgb(255, 255, 255); color: white;" ng-model="loginData.email"
                     ng-required="true" ng-minlength="10">
             </div>
             <div>
@@ -17,8 +17,11 @@
             </div>
             <div style="text-align: center;">
                 <button class="btn"
-                    style="border: solid 2px black; color: white; background-color: rgba(0, 0, 0, 0.691);" type="button"
+                    style="border: solid 2px black; width: 12rem; color: white; background-color: rgb(19, 19, 135);" type="button"
                     ng-click="login()">Entrar</button>
+            </div>
+            <div style="display: flex; justify-content: end; margin-top: 0.5rem;">
+                <label ui-sref="recoverPassword" style="color: white; font-size: 11px; cursor: pointer;">Esqueceu sua senha?</label>
             </div>
         </form>
     </div>

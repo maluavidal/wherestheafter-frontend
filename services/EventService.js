@@ -11,12 +11,17 @@ myApp.service("EventService", function ($http) {
   this.deleteEvent = (id) => {
     return $http.delete(`${baseUrl}events/${id}`)
   }
-
   this.showEvent = (id) => {
     return $http.get(`${baseUrl}events/${id}`)
   }
-
   this.updateEvent = (eventId, data) => {
-     return $http.put(`${baseUrl}events/${eventId}`, data);
+    return $http.put(`${baseUrl}events/${eventId}`, data);
   }
+  this.updateEvent = (eventId, data) => {
+    return $http.put(`${baseUrl}events/${eventId}`, data);
+  }
+  this.getAddress = (data) => {
+    return $http.get(`${baseUrl}events/cep`, {params: {cep: data}});
+  }
+  
 });
