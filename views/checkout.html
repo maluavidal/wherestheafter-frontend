@@ -7,7 +7,8 @@
 
     </div>
 
-    <div style="text-align: left; margin-bottom: 30px; margin-left: 20vw; margin-top: 7vh; margin-right: 20vw; display: flex; flex-direction: column;">
+    <div
+        style="text-align: left; margin-bottom: 30px; margin-left: 20vw; margin-top: 7vh; margin-right: 20vw; display: flex; flex-direction: column;">
         <div class="d-flex justify-content-between">
             <div>
                 <div style="font-weight: bold; font-size: 30px; margin-bottom: 15px;">{{event.name}}</div>
@@ -18,7 +19,8 @@
             </div>
 
             <div style="display: flex; flex-direction: column;">
-                <div style="background-color: black; color: white; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+                <div
+                    style="background-color: black; color: white; display: flex; align-items: center; justify-content: center; padding: 1rem;">
                     Ingressos
                 </div>
                 <div>
@@ -32,59 +34,74 @@
             </div>
 
         </div>
-        <form style="text-align: left; margin-bottom: 30px; margin-top: 7vh;">
+        <form style="text-align: left; margin-bottom: 1rem; margin-top: 7vh;" >
             <label>Nome *</label>
-            <input type="text" class="form-control" style="width: 25vw; margin-bottom: 30px;" ng-model="clientData.name">
+            <input type="text" class="form-control" style="width: 25vw; margin-bottom: 30px;"
+                ng-model="clientData.name" ng-disabled="firstStepBlocked">
             <label>CPF *</label>
-            <input type="text" class="form-control" style="width: 25vw; margin-bottom: 30px;" ng-model="clientData.cpf">
+            <input type="text" class="form-control" style="width: 25vw; margin-bottom: 30px;" ng-model="clientData.cpf"
+                ui-mask="999.999.999-99" ng-disabled="firstStepBlocked">
             <label>Email *</label>
-            <input type="email" class="form-control" style="width: 25vw; margin-bottom: 30px;" ng-model="clientData.email">
+            <input type="email" class="form-control" style="width: 25vw; margin-bottom: 30px;"
+                ng-model="clientData.email" ng-disabled="firstStepBlocked">
             <label>Data de nascimento *</label>
-            <input type="date" class="form-control" style="width: 25vw; margin-bottom: 30px;" ng-model="clientData.born_at">
+            <input type="date" class="form-control" style="width: 25vw;"
+                ng-model="clientData.born_at" ng-disabled="firstStepBlocked">
         </form>
+
+        <div style="margin-top: 3rem; justify-content: center; display: flex;">
+            <button ng-click="registerClient(clientData)" class="btn btn-primary" ng-if="!firstStepBlocked">Enviar</button>
+        </div>
     </div>
 
     <div>
         <h1 style="margin-top: 7vh; margin-left: 3vw; font-weight: bold;">Segundo passo:</h1>
-        <div style="text-align: left; margin-bottom: 30px; margin-top: 7vh; margin-left: 20vw; margin-right: 20vw;"> 
-            <select class="form-control" style="width: 20vw;  margin-bottom: 3vh;" ng-change="changevalue()" ng-model="method" ng-options="paymentMethod.name + ' (' + (paymentMethod.type) + ')' for paymentMethod in paymentMethods">
+        <div style="text-align: left; margin-bottom: 30px; margin-top: 7vh; margin-left: 20vw; margin-right: 20vw;">
+            <select class="form-control" style="width: 20vw;  margin-bottom: 3vh;" ng-change="changevalue()"
+                ng-model="method"
+                ng-options="paymentMethod.name + ' (' + (paymentMethod.type) + ')' for paymentMethod in paymentMethods">
                 <option value="">Selecione um método de pagamento</option>
             </select>
             <div>
                 <h5 style="margin-bottom: 3vh;">Informações de pagamento:</h5>
-                <div style="display: flex; justify-content: space-between; font-size: 13px;"> 
+                <div style="display: flex; justify-content: space-between; font-size: 13px;">
                     <div style="display: flex; flex-direction: column;">
                         <label>Número do cartão</label>
-                        <input placeholder="0000 0000 0000 0000" ng-model="cardNumber" card-number class="form-control" type="text" style="width: 18vw;" ng-max-length="16">
+                        <input placeholder="0000 0000 0000 0000" ng-model="cardNumber" card-number class="form-control"
+                            type="text" style="width: 18vw;" ng-max-length="16" ng-model="paymentData.card_number" ng-disabled="!firstStepBlocked">
                     </div>
                     <div style="display: flex; flex-direction: column; ">
                         <label>Data de validade</label>
-                        <input placeholder="MM/AA" class="form-control" type="text" style="width: 18vw;">
+                        <input placeholder="mm/aa" class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.expiration_date" ng-disabled="!firstStepBlocked">
                     </div>
                     <div style="display: flex; flex-direction: column;">
                         <label>Código de segurança</label>
-                        <input placeholder="000" class="form-control" type="text" style="width: 18vw;">
+                        <input placeholder="000" class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.security_code" ui-mask="999" ng-disabled="!firstStepBlocked">
                     </div>
                 </div>
                 <div>
                     <h5 style="margin-bottom: 3vh; margin-top: 5vh;">Dados do titular do cartão:</h5>
-                    <div style="display: flex; justify-content: space-between; font-size: 13px;"> 
+                    <div style="display: flex; justify-content: space-between; font-size: 13px;">
                         <div style="display: flex; flex-direction: column;">
                             <label>Nome impresso no cartão</label>
-                            <input class="form-control" type="text" style="width: 18vw;">
+                            <input class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.cardholder_name" ng-disabled="!firstStepBlocked">
                         </div>
                         <div style="display: flex; flex-direction: column; ">
                             <label>Data de nascimento</label>
-                            <input class="form-control" type="date" style="width: 18vw;">
+                            <input class="form-control" type="date" style="width: 18vw;" ng-model="paymentData.birthdate" ng-disabled="!firstStepBlocked">
                         </div>
                         <div style="display: flex; flex-direction: column;">
                             <label>CPF</label>
-                            <input class="form-control" type="text" style="width: 18vw;">
+                            <input class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.cpf" ui-mask="999.999.999-99" ng-disabled="!firstStepBlocked">
                         </div>
                     </div>
 
+                    <div style="margin-top: 3rem; justify-content: center; display: flex;">
+                        <button ng-click="executePayment()" class="btn btn-primary" ng-if="firstStepBlocked">Efetuar pagamento</button>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>

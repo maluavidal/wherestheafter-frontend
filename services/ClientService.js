@@ -9,7 +9,7 @@ myApp.service("ClientService", function ($http) {
         return $http.put(`${baseUrl}clients/${id}`)
     }
     this.createClient = (data) => {
-        return $http.post(`${baseUrl}clients`, data)
+        return $http.post(`${baseUrl}clients/`, data)
     }
     this.deleteClient = (id) => {
         return $http.delete(`${baseUrl}clients/${id}`)

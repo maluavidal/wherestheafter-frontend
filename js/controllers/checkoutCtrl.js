@@ -1,4 +1,4 @@
-myApp.controller('checkoutCtrl', ['$scope', '$state', 'EventsClientService', 'EventService', 'ClientService', 'PdfService', function ($scope, $state, EventsClientService, EventService, ClientService, PdfService) {
+myApp.controller('checkoutCtrl', ['$scope', '$state', 'EventsClientService', 'EventService', 'ClientService', 'PdfService', 'PaymentService', function ($scope, $state, EventsClientService, EventService, ClientService, PdfService, PaymentService) {
 
     const id = $state.params.eventId;
 
@@ -62,6 +62,7 @@ myApp.controller('checkoutCtrl', ['$scope', '$state', 'EventsClientService', 'Ev
     }
 
     const registerClient = (data) => {
+        console.log(data);
         const clientBirthDate = {
             ...data,
             born_at: moment(data.born_at, 'DD/MM/YYYY').format('YYYY-MM-DD HH:mm')
@@ -69,12 +70,13 @@ myApp.controller('checkoutCtrl', ['$scope', '$state', 'EventsClientService', 'Ev
 
         console.log(clientBirthDate, 'clientBirthDate')
 
-        return ClientService.createClient($scope.clientData)
+        return ClientService.createClient(clientBirthDate)
             .then(() => {
-                $state.go('home');
+                $scope.firstStepBlocked = true
             })
     }
 
+    $scope.registerClient = registerClient
 
     const generatePdf = (data) => {
         PdfService.generatePdf(data)
@@ -84,13 +86,10 @@ myApp.controller('checkoutCtrl', ['$scope', '$state', 'EventsClientService', 'Ev
         .catch((e) => {
             console.log(e);
         })
+
     }
 
-    generatePdf()
-
     $scope.changevalue = changevalue
-
-    $scope.registerClient = registerClient
 
     // const createEventsClient = (data) => {
     //     EventsClientService.createEventsClient(data)
@@ -102,6 +101,25 @@ myApp.controller('checkoutCtrl', ['$scope', '$state', 'EventsClientService', 'Ev
 
     // createEventsClient()
 
+    $scope.paymentData = {
+        card_number: '',
+        expiration_date: '',
+        security_code: '',
+        cardholder_name: '',
+        cardholder_birthdate: '',
+        cpf: ''
+    }
+
+    const executePayment = () => {
+        PaymentService.executePayment($scope.paymentData)
+        .then(() => {
+            generatePdf()
+        })
+        .catch((e) => {
+            console.log(e)
+        })
+    }
     
+    $scope.executePayment = executePayment
 
 }])

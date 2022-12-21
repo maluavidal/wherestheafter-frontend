@@ -1,4 +1,4 @@
-const myApp = angular.module("ticket", ['ui.router', 'ui.bootstrap']);
+const myApp = angular.module("ticket", ['ui.router', 'ui.bootstrap', 'ui.mask']);
 const baseUrl = 'http://localhost:3000/';
 
 myApp.config(function ($stateProvider, $httpProvider) {
@@ -37,7 +37,7 @@ myApp.config(function ($stateProvider, $httpProvider) {
         })
         .state({
             name: "checkout",
-            url: "/eventsclient/{eventId}",
+            url: "/checkout/{eventId}",
             templateUrl: "views/checkout.html",
             controller: "checkoutCtrl"
         })
@@ -49,8 +49,14 @@ myApp.config(function ($stateProvider, $httpProvider) {
         })
         .state({
             name: "recoverPassword",
-            url: "recover-password",
+            url: "/recovery",
             templateUrl: "views/recoverPassword.html",
             controller: "recoverPasswordCtrl"
+        })
+        .state({
+            name: "changePassword",
+            url: "/change-password",
+            templateUrl: "views/changePassword.html",
+            controller: "changePasswordCtrl"
         })
 })

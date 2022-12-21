@@ -29,9 +29,5 @@ myApp.controller("recoverPasswordCtrl", ['$scope', "RecoverPasswordService", "Al
         }).catch(() => {
           AlertMessage.error("Erro ao enviar sua solicitação!")
         });
-      
   };
-  
-  
-  
   }]);

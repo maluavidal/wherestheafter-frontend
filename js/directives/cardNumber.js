@@ -7,11 +7,7 @@ myApp.directive("cardNumber", function () {
                 if (!cardNumber) {
                     return
                 }
-                const cardNumberFormat = cardNumber.match(/\d{1,4}/g).join('.');
-
-                if (cardNumber.length > 15) {
-                    return
-                }
+                const cardNumberFormat = cardNumber.match(/\d{1,4}/g).join(' ');
 
                 return cardNumberFormat;
             }

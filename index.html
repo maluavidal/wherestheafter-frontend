@@ -31,12 +31,12 @@
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
     crossorigin="anonymous"></script>
   <script src="/assets/libs/ui-bootstrap-tpls-2.5.0.min.js"></script>
+  <script src="/assets/libs/ng-file-upload.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
+    <script src="./node_modules/angular-ui-mask/dist/mask.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 
   <script src="./js/app.js"></script>
@@ -44,6 +44,7 @@
   <script src="./js/directives/cardNumber.js"></script>
   <script src="./js/directives/cpfValidator.js"></script>
   <script src="./js/directives/expirationDate.js"></script>
+  <script src="./js/directives/uploadThumb.js"></script>
 
   <script src="./services/EventService.js"></script>
   <script src="./services/UserService.js"></script>
@@ -54,6 +55,8 @@
   <script src="./services/PdfService.js"></script>
   <script src="./services/ThumbService.js"></script>
   <script src="./services/AlertMessage.js"></script>
+  <script src="./services/RecoverPasswordService.js"></script>
+  <script src="./services/PaymentService.js"></script>
 
   <script src="./js/controllers/homeCtrl.js"></script>
   <script src="./js/controllers/eventCtrl.js"></script>
@@ -63,6 +66,8 @@
   <script src="./js/controllers/checkoutCtrl.js"></script>
   <script src="./js/controllers/clientCtrl.js"></script>
   <script src="./js/controllers/createEventCtrl.js"></script>
+  <script src="./js/controllers/recoverPasswordCtrl.js"></script>
+  <script src="./js/controllers/changePasswordCtrl.js"></script>
 
   <div>
     <ui-view></ui-view>
