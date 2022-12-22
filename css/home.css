@@ -1,8 +1,9 @@
 .events-grid {
     display: grid;
     margin: 5vw;
-    grid-template-columns: repeat(6, 15vw);
+    grid-template-columns: repeat(5, 18vw);
     grid-auto-rows: minmax(400px, auto);
+   
 }
 
 .image {

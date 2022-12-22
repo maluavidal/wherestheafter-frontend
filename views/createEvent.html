@@ -1,8 +1,6 @@
 <div style="padding: 100px;">
     <h5 style="margin-bottom: 2rem;">Informações do evento:</h5>
 
-    <pre>{{ event | json }}</pre>
-
     <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 3rem;">
         <div style="display: flex; justify-content: space-between; width: 100%; padding: 2rem; border-radius: 20px; border: 1px solid black;">
             <div style="display: flex; flex-direction: column; justify-content: space-between;">
@@ -31,7 +29,7 @@
             <div style="display: flex; justify-content: space-between; margin-bottom: 3vh;">
                 <div style="display: flex; flex-direction: column;">
                     <label>CEP</label>
-                    <input ng-blur="getAddressByCep()" ng-model="event.cep" class="form-control" type="text" style="width: 18rem;">
+                    <input ng-blur="getAddressByCep()" ng-model="event.address_cep" class="form-control" type="text" style="width: 18rem;">
                 </div>
                 <div style="display: flex; flex-direction: column;">
                     <label>Estado</label>
@@ -78,7 +76,7 @@
         ola
     </label> -->
 
-    <img src="{{ event.file.thumbUrl }}" style="width: 800px; height: 450px; ">
+    <img ng-show="thumbUrl" src="{{ thumbUrl }}" style="width: 800px; height: 450px; ">
 
     <input style="margin-top: 2rem; font-size: 13px;" class="form-control form-control-lg" type="file" id="file" name="file" ngf-select onchange="angular.element(this).scope().uploadFile(this.files)">
 

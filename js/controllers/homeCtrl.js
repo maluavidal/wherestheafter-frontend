@@ -5,10 +5,8 @@ myApp.controller('homeCtrl', ['$scope', "$state", "EventService", '$location', f
             listCities()
     };
 
-    const listAllEvents = searchText => {
-        EventService.listEvents({
-            name: searchText
-        }).then(resp => {
+    const listAllEvents = filter => {
+        EventService.listEvents(filter).then(resp => {
             $scope.events = resp.data;
         }).catch((e) => {
             console.log(e);
@@ -25,6 +23,14 @@ myApp.controller('homeCtrl', ['$scope', "$state", "EventService", '$location', f
             starts_at: moment($scope.startDate).startOf('day').format('YYYY-MM-DD'),
             ends_at: moment($scope.endDate).startOf('day').format('YYYY-MM-DD')
         }
+        listAllEvents(filter);
+    }
+
+    const searchName = () => {
+        const filter = {
+            name: $scope.searchEvents
+        }
+        console.log(filter)
         listAllEvents(filter);
     }
 
@@ -53,5 +59,6 @@ myApp.controller('homeCtrl', ['$scope', "$state", "EventService", '$location', f
     $scope.changeDate = changeDate;
     $scope.filterLocation = filterLocation;
     $scope.listCities = listCities;
+    $scope.searchName = searchName;
 
 }]);

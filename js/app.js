@@ -42,6 +42,12 @@ myApp.config(function ($stateProvider, $httpProvider) {
             controller: "checkoutCtrl"
         })
         .state({
+            name: "checkout2",
+            url: "/payments/{clientId}/{eventId}",
+            templateUrl: "views/checkout2.html",
+            controller: "paymentCtrl"
+        })
+        .state({
             name: "createEvent",
             url: "/events",
             templateUrl: "views/createEvent.html",

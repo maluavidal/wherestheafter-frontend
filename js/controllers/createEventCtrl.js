@@ -18,22 +18,28 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
     $scope.backgroundImage = {};
 
     const createEvent = () => {
-        EventService.createEvent($scope.event)
-        .then(() => {
+        const data = {
+            ...$scope.event,
+            starts_at: moment($scope.event.starts_at).format('YYYY-MM-DD'),
+            ends_at: moment($scope.event.ends_at).format('YYYY-MM-DD')
+        }
+
+        EventService.createEvent(data)
+            .then(() => {
             $state.go('producerPage')
-        })
-        .catch((e) => {
-            console.log(e)
-        })
+            })
+            .catch((e) => {
+                console.log(e)
+            })
     }
 
 
-    const onSelectFile = ($file) => {
-        console.log($files);
-    }
+    // const onSelectFile = ($file) => {
+    //     console.log($file);
+    // }
 
     const getAddressByCep = () => {
-        EventService.getAddress($scope.event.cep).then(({ data }) => {
+        EventService.getAddress($scope.event.address_cep).then(({ data }) => {
             $scope.event.state = data.state
             $scope.event.city = data.city
             $scope.event.street = data.street
@@ -59,28 +65,18 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
     }
 
     const uploadFile = async files => {
-        if (!files || !files.length) {
-            return;
-        }
+        if (!files || !files.length) return;
+        const fileNoBase64 = files[0];
 
-        const file = files[0];
-
-        file.thumbUrl = await getImageThumbUrl(file);
-
-        console.log(file.thumbUrl, 'file.thumbUrl');
+        $scope.thumbUrl = await getImageThumbUrl(fileNoBase64);
 
         $timeout(() => {
-            $scope.event.file = file;
-            console.log($scope.event.file, '$scope.backgroundImage')
-        })
-
-
-
-        // $scope.$digest();
+            $scope.event.file = fileNoBase64;
+        }) 
     };
 
     $scope.createEvent = createEvent
     $scope.uploadFile = uploadFile;
     $scope.getAddressByCep = getAddressByCep;
-    $scope.onSelectFile = onSelectFile;
+    // $scope.onSelectFile = onSelectFile;
 }])

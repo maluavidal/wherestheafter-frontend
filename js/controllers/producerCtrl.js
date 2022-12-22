@@ -42,7 +42,6 @@ myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventServi
             starts_at: moment(data.starts_at, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm')
         };
 
-
         return EventService.updateEvent(data.id, eventDataToUpdate)
         .then(() => {
             data.check = false

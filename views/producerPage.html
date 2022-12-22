@@ -14,11 +14,11 @@
                     </th>
                     <th>
                         <i class="fa-solid fa-sort" ng-click="orderDates()"></i>
-                        <span>DATA</span>
+                        <span>ESTADO</span>
                     </th>
                     <th>
                         <i class="fa-solid fa-sort" ng-click="orderLocations()"></i>
-                        <span>LOCAL E HORA</span>
+                        <span>DATA E HORA</span>
                     </th>
                     <th>ESPAÇO</th>
                     <th>INGRESSOS</th>
@@ -44,7 +44,7 @@
                             <i class="bi bi-pencil-square"></i>
                     </td>
                     <td><i class="bi bi-check-circle-fill" style="font-size: 18px; color:green; cursor: pointer;"
-                            ng-click="updateEvent(usersEvent)" class="check-element animate-show-hide"
+                            ng-click="updateEvent(usersEvent, usersEvent)" class="check-element animate-show-hide"
                             ng-show="usersEvent.check" title="Salvar alterações"></i></td>
                     <td><i class="bi bi-trash3-fill" style="font-size: 18px; color:black; cursor: pointer;"
                             ng-click="deleteEvent(usersEvent.id)" class="check-element animate-show-hide"

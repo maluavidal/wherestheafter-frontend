@@ -1,0 +1,51 @@
+<div>
+    <h1 style="margin-top: 7vh; margin-left: 3vw; font-weight: bold;">Segundo passo:</h1>
+    <div style="text-align: left; margin-bottom: 30px; margin-top: 7vh; margin-left: 20vw; margin-right: 20vw;">
+        <select class="form-control" ng-options="paymentMethod.value as paymentMethod.name + ' (' + paymentMethod.type + ')' for paymentMethod in paymentMethods" style="width: 20vw;  margin-bottom: 3vh;" ng-model="paymentData.payment_method">
+            <option value="">Selecione um método de pagamento</option>
+            <!-- <option ng-repeat="paymentMethod in paymentMethods" value="{{paymentMethod.value}}">{{ paymentMethod.name + '(' + paymentMethod.type + ')' }}</option> -->
+        </select>
+        
+
+        <div>
+            <h5 style="margin-bottom: 3vh;">Informações de pagamento:</h5>
+            <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                <div style="display: flex; flex-direction: column;">
+                    <label>Número do cartão</label>
+                    <input placeholder="0000 0000 0000 0000" card-number class="form-control"
+                        type="text" style="width: 18vw;" ng-max-length="16" ng-model="paymentData.card_number">
+                </div>
+                <div style="display: flex; flex-direction: column; ">
+                    <label>Data de validade</label>
+                    <input placeholder="mm/aa" class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.expiration_date"  ui-mask="99/99">
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <label>Código de segurança</label>
+                    <input placeholder="000" class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.security_code" ui-mask="999">
+                </div>
+            </div>
+
+            <div>
+                <h5 style="margin-bottom: 3vh; margin-top: 5vh;">Dados do titular do cartão:</h5>
+                <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                    <div style="display: flex; flex-direction: column;">
+                        <label>Nome impresso no cartão</label>
+                        <input class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.cardholder_name">
+                    </div>
+                    <div style="display: flex; flex-direction: column; ">
+                        <label>Data de nascimento</label>
+                        <input class="form-control" type="date" style="width: 18vw;" ng-model="paymentData.cardholder_birthdate">
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <label>CPF</label>
+                        <input class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.cpf" ui-mask="999.999.999-99">
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem; justify-content: center; display: flex;">
+                    <button ng-click="executePayment(paymentData)" class="btn btn-primary" ng-hide="!paymentData.card_number || !paymentData.expiration_date || !paymentData.security_code || !paymentData.cardholder_name || !paymentData.cardholder_birthdate || !paymentData.cpf">Efetuar pagamento</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
