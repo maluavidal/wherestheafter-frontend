@@ -3,7 +3,6 @@
     <div style="text-align: left; margin-bottom: 30px; margin-top: 7vh; margin-left: 20vw; margin-right: 20vw;">
         <select class="form-control" ng-options="paymentMethod.value as paymentMethod.name + ' (' + paymentMethod.type + ')' for paymentMethod in paymentMethods" style="width: 20vw;  margin-bottom: 3vh;" ng-model="paymentData.payment_method">
             <option value="">Selecione um método de pagamento</option>
-            <!-- <option ng-repeat="paymentMethod in paymentMethods" value="{{paymentMethod.value}}">{{ paymentMethod.name + '(' + paymentMethod.type + ')' }}</option> -->
         </select>
         
 
@@ -43,7 +42,7 @@
                 </div>
 
                 <div style="margin-top: 3rem; justify-content: center; display: flex;">
-                    <button ng-click="executePayment(paymentData)" class="btn btn-primary" ng-hide="!paymentData.card_number || !paymentData.expiration_date || !paymentData.security_code || !paymentData.cardholder_name || !paymentData.cardholder_birthdate || !paymentData.cpf">Efetuar pagamento</button>
+                    <button ng-click="executePayment(paymentData)" class="btn btn-primary" ng-disabled="!paymentData.card_number || !paymentData.expiration_date || !paymentData.security_code || !paymentData.cardholder_name || !paymentData.cardholder_birthdate || !paymentData.cpf">Efetuar pagamento</button>
                 </div>
 
             </div>

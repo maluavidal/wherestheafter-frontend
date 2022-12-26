@@ -10,7 +10,7 @@ myApp.controller('sessionCtrl', ['$scope', '$state', 'SessionService', function 
                 localStorage.setItem("token", resp.data.token);
 
                 if (resp.data.admin) {
-                    localStorage.setItem("is_admin", true);
+                    localStorage.setItem("is_admin", false);
                 }
 
                 $state.go(`producerPage`)

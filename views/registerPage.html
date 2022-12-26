@@ -1,30 +1,53 @@
-<div style="height: 100vh; display: flex; align-items: center; justify-content: center; background-image: url('../assets/poster/register-page-background-image.jpeg'); background-repeat: no-repeat; background-size: cover;">
+<div
+    style="height: 100vh; display: flex; align-items: center; justify-content: center; background-image: url('../assets/poster/register-page-background-image.jpeg'); background-repeat: no-repeat; background-size: cover;">
     <div style=" display: flex; flex-direction: column; align-items: center;">
         <div class="centered">SEJA UM PRODUTOR</div>
-        <form
-            style="width: 20vw; background-color: rgba(194, 194, 194, 0.321); padding: 30px; border: solid 3px rgba(4, 3, 3, 0.758); border-radius: 5%">
+        <form name="register"
+            style="width: 20vw; background-color: rgba(0, 0, 0, 0.62); padding: 30px; border: solid 3px rgba(253, 253, 253, 0.758); border-radius: 5%">
             <div>
                 <label style="color: white;"></label>
-                <input class="form-control" placeholder="Nome"
-                    style="margin-bottom: 3px; border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="userData.name" ng-required="true" ng-minlength="2">
+                <input class="form-control" placeholder="Nome" name="nameInput"
+                    style="border: solid 2px rgba(0, 0, 0, 0.486)" ng-model="userData.name" required ng-minlength="2">
+                <span ng-show="register.nameInput.$error.required && register.nameInput.$dirty"
+                    style="color: red; font-size: 11px;">Campo obrigatório *</span>
             </div>
-            <div>
-                <label for="exampleInputEmail1" style="color: white;"></label>
-                <input type="email" class="form-control" placeholder="Email"
-                    style="margin-bottom: 3px; border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="userData.email" ng-required="true" ng-minlength="10">
-            </div>
-            <div>
-                <label for="exampleInputPassword1" style="color: white;"></label>
-                <input type="password" class="form-control" placeholder="Senha"
-                    style="margin-bottom: 3px; border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="userData.password" ng-required="true" ng-minlength="6">
+            <div style="margin-bottom: 3px;">
+                <label style="color: white;"></label>
+                <input name="emailInput" type="email" class="form-control" placeholder="Email"
+                    style="border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="userData.email"
+                    ng-required="true" ng-minlength="10" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/">
+                <span ng-show="register.emailInput.$error.required && register.emailInput.$dirty"
+                    style="color: red; font-size: 11px;">Campo obrigatório *<br></span>
+                <span ng-show="register.emailInput.$error.pattern" style="color: red; font-size: 11px;">Email inválido
+                    *<br></span>
+                <span ng-show="register.emailInput.$error.minlength" style="color: red; font-size: 11px;">Email deve ter
+                    no mínimo 10 caracteres *</span>
+
             </div>
             <div>
                 <label style="color: white;"></label>
-                <input type="password" class="form-control" placeholder="Confirmar senha"
-                    style="margin-bottom: 20px; border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="userData.confirmPassword" ng-required="true" ng-minlength="2">
+                <input name="passwordInput" type="password" class="form-control" placeholder="Senha"
+                    style="margin-bottom: 3px; border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="userData.password"
+                    ng-required="true" ng-minlength="6">
+                <span ng-show="register.passwordInput.$error.required && register.passwordInput.$dirty"
+                    style="color: red; font-size: 11px;">Campo obrigatório * <br></span>
+                <span ng-show="register.passwordInput.$error.minlength" style="color: red; font-size: 11px;">Senha deve
+                    ter no mínimo 6 caracteres *</span>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <label style="color: white;"></label>
+                <input name="confirmPasswordInput" type="password" class="form-control" placeholder="Confirmar senha"
+                    style="border: solid 2px rgba(0, 0, 0, 0.486);" ng-model="userData.confirmPassword"
+                    ng-required="true" ng-minlength="6">
+                <span ng-show="register.confirmPasswordInput.$error.required && register.confirmPasswordInput.$dirty"
+                    style="color: red; font-size: 11px;">Campo obrigatório * <br></span>
+                <span ng-show="!passwordMatch" style="color: red; font-size: 11px;">A senha e sua confirmação precisam ser iguais *</span>
             </div>
             <div style="text-align: center;">
-                <button type="button" class="btn" style="border: solid 2px rgba(255, 255, 255, 0.521); color: white; background-color:rgba(0, 0, 0, 0.944)" ng-click="registerUser()">Cadastrar</button>
+                <button type="button" class="btn"
+                    style="border: solid 2px rgba(255, 255, 255, 0.521); color: white; background-color:rgba(0, 0, 0, 0.944)"
+                    ng-click="registerUser()">Cadastrar</button>
+                    
             </div>
         </form>
     </div>

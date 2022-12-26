@@ -13,7 +13,7 @@ myApp.config(function ($stateProvider, $httpProvider) {
         })
         .state({
             name: "eventPage",
-            url: "/events/:id",
+            url: "/events/{id}",
             templateUrl: "views/eventPage.html",
             controller: "eventCtrl"
         })
@@ -64,5 +64,11 @@ myApp.config(function ($stateProvider, $httpProvider) {
             url: "/change-password",
             templateUrl: "views/changePassword.html",
             controller: "changePasswordCtrl"
+        })
+        .state({
+            name: "editEvent",
+            url: "/editEvent/{usersEventId}",
+            templateUrl: "views/editEvent.html",
+            controller: "editEventCtrl"
         })
 })

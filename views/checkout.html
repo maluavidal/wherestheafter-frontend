@@ -1,7 +1,4 @@
 <div>
-    <nav style="background-color: black; color: white;">
-        nav
-    </nav>
     <h1 style="margin-top: 3rem; margin-left: 3vw; font-weight: bold;">Primeiro passo:</h1>
     <div>
 
@@ -50,7 +47,7 @@
         </form>
 
         <div style="margin-top: 3rem; justify-content: center; display: flex;">
-            <button ng-click="registerClientEvent()" class="btn btn-primary" ng-hide="!clientData.name || !clientData.cpf || !clientData.email || !clientData.born_at">Enviar</button>
+            <button ng-click="registerClient()" class="btn btn-primary" ng-disabled="!clientData.name || !clientData.cpf || !clientData.email || !clientData.born_at">Enviar</button>
         </div>
     </div>
 

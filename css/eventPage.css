@@ -1,0 +1,16 @@
+.ongoing {
+    color: green;
+}
+
+.over {
+    color: red;
+}
+
+.unableToEdit {
+    visibility: hidden;
+    
+}
+
+.unableToEdit:hover {
+    cursor:none
+}

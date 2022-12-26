@@ -16,45 +16,11 @@ myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventServi
                     
                     return usersEvent;
                 })
-            
             })
         .catch((e) => {
             console.log(e)
         })
-    }
-
-    const enableEdit = usersEvent => {
-        console.log(usersEvent)
-        $scope.usersEvents = $scope.usersEvents.map(user => {
-            if (user.id === usersEvent.id) {
-                user.enable_edit = !user.enable_edit;
-            }
-
-            return user;
-        });
-
-        usersEvent.check = true;
-    }
-
-    const updateEvent = (data) => {
-        const eventDataToUpdate = {
-            ...data,
-            starts_at: moment(data.starts_at, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm')
-        };
-
-        return EventService.updateEvent(data.id, eventDataToUpdate)
-        .then(() => {
-            data.check = false
-        })
-        .catch((e) => {
-            Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: 'An error ocurred',
-                showConfirmButton: false,
-                timer: 1500
-              })
-        })    }
+    } 
 
     const deleteEvent = async (usersEvent) => {
         const confirmation = await Swal.fire({
@@ -91,9 +57,46 @@ myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventServi
         })
     } 
 
+    $scope.orderMethod = ''
+    $scope.orderDirection = true
+
+    const inOrder = (method) => {
+        $scope.orderMethod = method
+        $scope.orderDirection = !$scope.orderDirection
+    }
+
+    $scope.inOrder = inOrder
+
     profile()
 
-    $scope.updateEvent = updateEvent;
-    $scope.deleteEvent = deleteEvent
-    $scope.enableEdit = enableEdit;
+    $scope.logOut = async () => {
+        const confirmation = await Swal.fire({
+          title: 'Tem certeza que dejesa sair?',
+          text: "Você será desconectado de sua conta!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sair',
+          cancelButtonText: "Cancelar",
+        });
+    
+        if (!confirmation.isConfirmed) {
+          return;
+        }
+    
+        $state.go('loginPage');
+      }
+
+    $scope.deleteEvent = deleteEvent;
+    
+    const goToEdit = (id) => {
+        $state.go('editEvent', {
+            usersEventId: id
+        });
+        console.log(id);
+    }
+
+    $scope.goToEdit = goToEdit
+
 }])

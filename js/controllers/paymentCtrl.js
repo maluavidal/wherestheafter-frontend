@@ -1,4 +1,4 @@
-myApp.controller('paymentCtrl', ['$scope', '$state', 'EventsClientService', 'PdfService', 'PaymentService', function ($scope, $state, EventsClientService, PdfService, PaymentService) {
+myApp.controller('paymentCtrl', ['$scope', '$state', 'EventsClientService', 'PdfService', 'PaymentService', '$timeout', function ($scope, $state, EventsClientService, PdfService, PaymentService, $timeout) {
 
     const eventId = $state.params.eventId;
     const clientId = $state.params.clientId;
@@ -41,15 +41,8 @@ myApp.controller('paymentCtrl', ['$scope', '$state', 'EventsClientService', 'Pdf
         },
     ]
 
-    const generatePdf = () => {
-        PdfService.generatePdf()
-        .then(resp => {
-            window.open(resp.data, '_blank')
-        })
-        .catch((e) => {
-            console.log(e);
-        })
-
+    const generatePdf = (paymentId) => {
+        return PdfService.generatePdf(paymentId)
     }
 
     $scope.paymentData = {
@@ -63,8 +56,14 @@ myApp.controller('paymentCtrl', ['$scope', '$state', 'EventsClientService', 'Pdf
 
     const executePayment = () => {
         PaymentService.executePayment(clientId, eventId, $scope.paymentData)
-        .then(() => {
-            generatePdf()
+        .then((resp) => {
+            const paymentId = resp.data.id
+            generatePdf(paymentId).then(resp => {
+                window.open(resp.data, '_blank')
+            })
+            .catch((e) => {
+                console.log(e);
+            })
         })
         .catch((e) => {
             console.log(e);

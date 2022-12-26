@@ -17,10 +17,6 @@
     border-bottom: solid;
 }
 
-.hover {
-    cursor: pointer;
-}
-
 .background {
     background-image: url("../assets/poster/register-page-background-image.jpeg");
     opacity: 0.6;

@@ -21,6 +21,7 @@ myApp.service("EventService", function ($http) {
       }
     })
   }
+  
   this.deleteEvent = (id) => {
     return $http.delete(`${baseUrl}events/${id}`)
   }

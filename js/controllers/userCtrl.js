@@ -7,7 +7,14 @@ myApp.controller('userCtrl', ['$scope', '$state', 'UserService', function ($scop
         confirmPassword: '',
     }
 
+    $scope.passwordMatch = true
+
     const registerUser = () => {
+        if ($scope.userData.password !== $scope.userData.confirmPassword) {
+            $scope.passwordMatch = false;
+            return
+        }
+
         UserService.createUser($scope.userData)
             .then(() => {
                 $state.go('loginPage');

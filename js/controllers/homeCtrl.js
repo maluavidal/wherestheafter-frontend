@@ -30,13 +30,12 @@ myApp.controller('homeCtrl', ['$scope', "$state", "EventService", '$location', f
         const filter = {
             name: $scope.searchEvents
         }
-        console.log(filter)
         listAllEvents(filter);
     }
 
-    const filterLocation = location => {
+    const filterLocation = () => {
         const filter = {
-            city: location
+            city: $scope.searchLocations
         }
 
         listAllEvents(filter);

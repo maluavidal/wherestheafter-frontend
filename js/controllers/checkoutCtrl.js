@@ -24,16 +24,14 @@ myApp.controller('checkoutCtrl', ['$scope', '$state', 'EventsClientService', 'Ev
         born_at: '',
     };
 
-
-    const registerClientEvent = () => {
-        console.log($scope.clientData, 'DATA');
+    const registerClient = () => {
         const clientBirthDate = {
             ...$scope.clientData,
             born_at: moment($scope.clientData.born_at).format('YYYY-MM-DD HH:mm')
         };
 
-        return ClientService.createClient(clientBirthDate).then(({data}) => {
-            console.log(data, 'resp')
+        return ClientService.createClient(clientBirthDate)
+        .then(({data}) => {
             $state.go('checkout2', {
                 eventId: id, 
                 clientId: data.id
@@ -41,7 +39,6 @@ myApp.controller('checkoutCtrl', ['$scope', '$state', 'EventsClientService', 'Ev
         })
     }
 
-    $scope.registerClientEvent = registerClientEvent
+    $scope.registerClient = registerClient
 
-    
 }])

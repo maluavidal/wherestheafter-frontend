@@ -1,4 +1,5 @@
 myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventService', function ($scope, $timeout, $state, EventService) {
+
     $scope.event = {
         name: "",
         about: "",
@@ -14,8 +15,6 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
         number: "",
         file: null
     };
-
-    $scope.backgroundImage = {};
 
     const createEvent = () => {
         const data = {
@@ -33,11 +32,6 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
             })
     }
 
-
-    // const onSelectFile = ($file) => {
-    //     console.log($file);
-    // }
-
     const getAddressByCep = () => {
         EventService.getAddress($scope.event.address_cep).then(({ data }) => {
             $scope.event.state = data.state
@@ -45,7 +39,7 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
             $scope.event.street = data.street
             $scope.event.state = data.state
         }).catch(() => {
-            alert('Endereco ta muito errado amigo!')
+            alert('Endereço inválido')
         })
     }
 
@@ -61,7 +55,6 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
                 resolve(reader.result);
             }
         });
-
     }
 
     const uploadFile = async files => {
@@ -78,5 +71,4 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
     $scope.createEvent = createEvent
     $scope.uploadFile = uploadFile;
     $scope.getAddressByCep = getAddressByCep;
-    // $scope.onSelectFile = onSelectFile;
 }])
