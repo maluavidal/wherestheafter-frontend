@@ -5,23 +5,30 @@ myApp.controller('editEventCtrl', ['$scope', '$state', 'EventService', function 
     const getEvent = () => {
         EventService.showEvent(id)
             .then(resp => {
-                $scope.event = resp.data
+                $scope.event = {
+                    ...resp.data,
+                    starts_at: new Date(resp.data.starts_at),
+                    ends_at: new Date(resp.data.ends_at),
+                }
             })
             .catch((e) => {
                 console.log(e);
             })
     }
 
-
     getEvent();
 
-    const updateEvent = (data) => {
-        const eventDataToUpdate = {
-            ...data,
-            starts_at: moment(data.starts_at, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm')
-        };
 
-        return EventService.updateEvent(id, eventDataToUpdate)
+
+    const updateEvent = (data) => {
+        // const eventDataToUpdate = {
+        //     ...data,
+        //     starts_at: new Date(data.starts_at),
+        //     ends_at: new Date(data.ends_at),
+        // };
+        console.log(data);
+
+        return EventService.updateEvent(id, data)
         .catch((e) => {
             Swal.fire({
                 position: 'center',

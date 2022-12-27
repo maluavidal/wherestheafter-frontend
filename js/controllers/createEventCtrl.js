@@ -39,7 +39,7 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
             $scope.event.street = data.street
             $scope.event.state = data.state
         }).catch(() => {
-            alert('Endereço inválido')
+            alert('Endereço inválido.')
         })
     }
 

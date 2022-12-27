@@ -1,4 +1,4 @@
-myApp.controller('userCtrl', ['$scope', '$state', 'UserService', function ($scope, $state, UserService) {
+myApp.controller('userCtrl', ['$scope', '$state', 'UserService', 'AlertMessage', function ($scope, $state, UserService, AlertMessage) {
 
     $scope.userData = {
         name: '',
@@ -12,6 +12,11 @@ myApp.controller('userCtrl', ['$scope', '$state', 'UserService', function ($scop
     const registerUser = () => {
         if ($scope.userData.password !== $scope.userData.confirmPassword) {
             $scope.passwordMatch = false;
+            return
+        }
+
+        if (!$scope.userData.name || !$scope.userData.email || !$scope.userData.password || !$scope.userData.confirmPassword) {
+            alert('Preencha todos os campos!')
             return
         }
 

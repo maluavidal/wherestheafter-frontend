@@ -32,22 +32,38 @@
 
 
         </div>
-        <form style="text-align: left; margin-bottom: 1rem; margin-top: 7vh;">
-            <label>Nome *</label>
-            <input type="text" class="form-control" style="width: 25vw; margin-bottom: 30px;"
-                ng-model="clientData.name">
-            <label>CPF *</label>
-            <input type="text" class="form-control" style="width: 25vw; margin-bottom: 30px;" ng-model="clientData.cpf"
-                ui-mask="999.999.999-99">
-            <label>Email *</label>
-            <input type="email" class="form-control" style="width: 25vw; margin-bottom: 30px;"
-                ng-model="clientData.email">
-            <label>Data de nascimento *</label>
-            <input type="date" class="form-control" style="width: 25vw;" ng-model="clientData.born_at">
+        <form name="clientInfo" style="text-align: left; margin-bottom: 1rem; margin-top: 7vh;">
+            <div style="margin-bottom: 30px;">
+                <label>Nome *</label>
+                <input name="nameInput" type="text" class="form-control" style="width: 25vw;"
+                    ng-model="clientData.name" required>
+                    <span ng-show="clientInfo.nameInput.$error.required && clientInfo.nameInput.$dirty"
+                    style="color: red; font-size: 11px;">Campo obrigatório *</span>
+            </div>
+            <div style="margin-bottom: 30px;">
+                <label>CPF *</label>
+                <input name="cpfInput" type="text" class="form-control" style="width: 25vw;" ng-model="clientData.cpf" required
+                    ui-mask="999.999.999-99">
+                <span ng-show="clientInfo.cpfInput.$error.required && clientInfo.cpfInput.$dirty"
+                    style="color: red; font-size: 11px;">Campo obrigatório *</span>
+            </div>
+            <div style="margin-bottom: 30px;">
+                <label>Email *</label>
+                <input name="email" type="email" class="form-control" style="width: 25vw;"
+                    ng-model="clientData.email" required>
+                    <span ng-show="clientInfo.email.$error.required && clientInfo.email.$dirty"
+                    style="color: red; font-size: 11px;">Campo obrigatório *</span>
+            </div>
+            <div>
+                <label>Data de nascimento *</label>
+                <input name="date" type="date" class="form-control" style="width: 25vw;" ng-model="clientData.born_at" required>
+                <span ng-show="clientInfo.date.$error.required && clientInfo.date.$dirty"
+                    style="color: red; font-size: 11px;">Campo obrigatório *</span>
+            </div>
         </form>
 
         <div style="margin-top: 3rem; justify-content: center; display: flex;">
-            <button ng-click="registerClient()" class="btn btn-primary" ng-disabled="!clientData.name || !clientData.cpf || !clientData.email || !clientData.born_at">Enviar</button>
+            <button ng-click="registerClient()" class="btn btn-primary">Enviar</button>
         </div>
     </div>
 

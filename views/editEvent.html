@@ -4,6 +4,7 @@
     <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 3rem;">
         <div style="display: flex; justify-content: space-between; width: 100%; padding: 2rem; border-radius: 20px; border: 1px solid black;">
             <div style="display: flex; flex-direction: column; justify-content: space-between;">
+                
                 <label>Nome do evento</label>
                 <input ng-model="event.name" class="form-control" type="text" style="width: 18rem;" ng-required="required">
             </div>
@@ -62,12 +63,21 @@
 
         <div style="display: flex; flex-direction: row;">
             <div
-                style="display: flex; flex-direction: column; border: solid 1px black; border-radius: 20px; padding: 2rem; width: 25.5rem; justify-content: space-between;">
-                <label>Data (início)</label>
-                <input ng-model="event.starts_at" class="form-control" type="datetime-local"
-                    style="width: 21.5rem; margin-bottom: 2rem">
-                <label>Data (fim)</label>
-                <input ng-model="event.ends_at" class="form-control" type="datetime-local" style="width: 21.5rem;">
+                style="display: flex; flex-direction: row; border: solid 1px black; border-radius: 20px; padding: 2rem; width: 25.5rem; justify-content: space-between;">
+                <div style="display: flex; flex-direction: column;">
+                    <label>Data (início)</label>
+                    <input ng-model="event.starts_at" ng-change="changedate()"  class="form-control" type="date"
+                        style="width: 10rem; margin-bottom: 2rem">
+                    <label>Data (fim)</label>
+                    <input ng-model="event.ends_at" class="form-control" type="date" style="width: 10rem;">
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <label>Hora (início)</label>
+                    <input class="form-control" ng-change="changedate()" type="time"
+                        style="width: 10rem; margin-bottom: 2rem" ng-model="event.starts_at">
+                    <label>Hora (fim)</label>
+                    <input class="form-control" type="time" ng-model="event.ends_at" style="width: 10rem;">
+                </div>
             </div>
 
         </div>
@@ -78,6 +88,6 @@
     <input style="margin-top: 2rem; font-size: 13px;" class="form-control form-control-lg" type="file" id="file" name="file" ngf-select onchange="angular.element(this).scope().uploadFile(this.files)">
 
     <div style="margin: auto; display: flex; flex-direction: column; width: 10rem; margin-top: 3rem;">
-        <button ng-click="createEvent()" class="btn btn-primary">Atualizar evento</button>
+        <button ng-click="updateEvent(event)" class="btn btn-primary">Atualizar evento</button>
     </div>
 </div>

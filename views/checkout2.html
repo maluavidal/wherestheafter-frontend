@@ -1,48 +1,64 @@
 <div>
     <h1 style="margin-top: 7vh; margin-left: 3vw; font-weight: bold;">Segundo passo:</h1>
     <div style="text-align: left; margin-bottom: 30px; margin-top: 7vh; margin-left: 20vw; margin-right: 20vw;">
-        <select class="form-control" ng-options="paymentMethod.value as paymentMethod.name + ' (' + paymentMethod.type + ')' for paymentMethod in paymentMethods" style="width: 20vw;  margin-bottom: 3vh;" ng-model="paymentData.payment_method">
-            <option value="">Selecione um método de pagamento</option>
-        </select>
-        
+        <form name="selectPayment" style="margin-bottom: 3vh;">
+            <select name="paymentMethod" required class="form-control" ng-options="paymentMethod.value as paymentMethod.name + ' (' + paymentMethod.type + ')' for paymentMethod in paymentMethods" style="width: 18vw;" ng-model="paymentData.payment_method">
+                <option value="">Selecione um método de pagamento</option>
+            </select>
+            <span style="font-size: 11px;" ng-show="selectPayment.paymentMethod.$error.required && selectPayment.paymentMethod.$dirty" class="text-danger">Por favor, selecione uma opção</span>
+        </form>
 
         <div>
             <h5 style="margin-bottom: 3vh;">Informações de pagamento:</h5>
-            <div style="display: flex; justify-content: space-between; font-size: 13px;">
-                <div style="display: flex; flex-direction: column;">
-                    <label>Número do cartão</label>
-                    <input placeholder="0000 0000 0000 0000" card-number class="form-control"
-                        type="text" style="width: 18vw;" ng-max-length="16" ng-model="paymentData.card_number">
-                </div>
-                <div style="display: flex; flex-direction: column; ">
-                    <label>Data de validade</label>
-                    <input placeholder="mm/aa" class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.expiration_date"  ui-mask="99/99">
-                </div>
-                <div style="display: flex; flex-direction: column;">
-                    <label>Código de segurança</label>
-                    <input placeholder="000" class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.security_code" ui-mask="999">
-                </div>
-            </div>
-
-            <div>
-                <h5 style="margin-bottom: 3vh; margin-top: 5vh;">Dados do titular do cartão:</h5>
+            <form name="paymentInfo">
                 <div style="display: flex; justify-content: space-between; font-size: 13px;">
                     <div style="display: flex; flex-direction: column;">
-                        <label>Nome impresso no cartão</label>
-                        <input class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.cardholder_name">
+                        <label>Número do cartão</label>
+                        <input name="cardNumber" placeholder="0000 0000 0000 0000" card-number class="form-control"
+                            type="text" style="width: 18vw;" required ng-max-length="16" ng-model="paymentData.card_number">
+                            <span ng-show="paymentInfo.cardNumber.$error.required && paymentInfo.cardNumber.$dirty"
+                        style="color: red; font-size: 11px;">Campo obrigatório *</span>
                     </div>
                     <div style="display: flex; flex-direction: column; ">
-                        <label>Data de nascimento</label>
-                        <input class="form-control" type="date" style="width: 18vw;" ng-model="paymentData.cardholder_birthdate">
+                        <label>Data de validade</label>
+                        <input name="expirationDate" required placeholder="mm/aa" class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.expiration_date"  ui-mask="99/99">
+                        <span ng-show="paymentInfo.expirationDate.$error.required && paymentInfo.expirationDate.$dirty"
+                        style="color: red; font-size: 11px;">Campo obrigatório *</span>
                     </div>
                     <div style="display: flex; flex-direction: column;">
-                        <label>CPF</label>
-                        <input class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.cpf" ui-mask="999.999.999-99">
+                        <label>Código de segurança</label>
+                        <input name="securityCode" required placeholder="000" class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.security_code" ui-mask="999">
+                        <span ng-show="paymentInfo.securityCode.$error.required && paymentInfo.securityCode.$dirty"
+                        style="color: red; font-size: 11px;">Campo obrigatório *</span>
                     </div>
                 </div>
+        
+                <div>
+                    <h5 style="margin-bottom: 3vh; margin-top: 5vh;">Dados do titular do cartão:</h5>
+                    <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                        <div style="display: flex; flex-direction: column;">
+                            <label>Nome impresso no cartão</label>
+                            <input name="cardholderName" required class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.cardholder_name">
+                            <span ng-show="paymentInfo.cardholderName.$error.required && paymentInfo.cardholderName.$dirty"
+                        style="color: red; font-size: 11px;">Campo obrigatório *</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; ">
+                            <label>Data de nascimento</label>
+                            <input name="birthdate" required class="form-control" type="date" style="width: 18vw;" ng-model="paymentData.cardholder_birthdate">
+                            <span ng-show="paymentInfo.birthdate.$error.required && paymentInfo.birthdate.$dirty"
+                        style="color: red; font-size: 11px;">Campo obrigatório *</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column;">
+                            <label>CPF</label>
+                            <input name="CPF" required class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.cpf" ui-mask="999.999.999-99">
+                            <span ng-show="paymentInfo.CPF.$error.required && paymentInfo.CPF.$dirty"
+                        style="color: red; font-size: 11px;">Campo obrigatório *</span>
+                        </div>
+                    </div>
+            </form>
 
                 <div style="margin-top: 3rem; justify-content: center; display: flex;">
-                    <button ng-click="executePayment(paymentData)" class="btn btn-primary" ng-disabled="!paymentData.card_number || !paymentData.expiration_date || !paymentData.security_code || !paymentData.cardholder_name || !paymentData.cardholder_birthdate || !paymentData.cpf">Efetuar pagamento</button>
+                    <button ng-click="executePayment(paymentData)" class="btn btn-primary">Efetuar pagamento</button>
                 </div>
 
             </div>

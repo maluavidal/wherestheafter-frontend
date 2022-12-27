@@ -6,7 +6,7 @@ myApp.directive("cpfValidator", ["$mdDialog", function($mdDialog) {
         function isValidCpf(cpf) {
           cpf = cpf.replace(/[^\d]+/g, '');
           if (cpf == '') return false;
-        // Elimina CPFs invalidos conhecidos    
+   
         if (cpf.length != 11 ||
           cpf == "00000000000" ||
           cpf == "11111111111" ||
@@ -19,7 +19,7 @@ myApp.directive("cpfValidator", ["$mdDialog", function($mdDialog) {
           cpf == "88888888888" ||
           cpf == "99999999999")
           return false;
-        // Valida 1o digito 
+
         var add = 0;
         for (var i = 0; i < 9; i++)
           add += parseInt(cpf.charAt(i)) * (10 - i);
@@ -56,10 +56,7 @@ myApp.directive("cpfValidator", ["$mdDialog", function($mdDialog) {
             );
           }
         }
-
       });
-
-
     }
   }
 }]);

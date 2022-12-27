@@ -67,8 +67,14 @@ myApp.config(function ($stateProvider, $httpProvider) {
         })
         .state({
             name: "editEvent",
-            url: "/editEvent/{usersEventId}",
+            url: "/edit-event/{usersEventId}",
             templateUrl: "views/editEvent.html",
             controller: "editEventCtrl"
+        })
+        .state({
+            name: "manageEvent",
+            url: "/manage-event/{usersEventId}",
+            templateUrl: "views/manageEvent.html",
+            controller: "manageEventCtrl"
         })
 })

@@ -1,5 +1,5 @@
 myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventService', 'AlertMessage', function ($scope, $state, UserService, EventService, AlertMessage) {
-    
+
     const profile = () => {
         UserService.profile()
         .then(resp => {
@@ -94,9 +94,17 @@ myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventServi
         $state.go('editEvent', {
             usersEventId: id
         });
-        console.log(id);
     }
 
     $scope.goToEdit = goToEdit
+
+    const manageEvent = (id) => {
+        $state.go('manageEvent',{
+            usersEventId: id
+        })
+        console.log(id);
+    }
+
+    $scope.manageEvent = manageEvent
 
 }])
