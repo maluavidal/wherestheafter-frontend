@@ -31,12 +31,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="usersEvent in usersEvents | orderBy: orderMethod:orderDirection " ng-click="manageEvent(usersEvent.id)" style="cursor: pointer;">
-                    <td ng-class="{ongoing: usersEvent.deleted_at === 'Ativo', over: usersEvent.deleted_at === 'Encerrado'}">{{usersEvent.deleted_at}}</td>
-                    <td>{{usersEvent.name}}</td>
-                    <td>{{usersEvent.state}}</td>
-                    <td>{{usersEvent.starts_at}}</td>
-                    <td>{{usersEvent.venue}}</td>
+                <tr ng-repeat="usersEvent in usersEvents | orderBy: orderMethod:orderDirection" style="cursor: pointer;">
+                    <td ng-click="manageEvent(usersEvent.id)" ng-class="{ongoing: usersEvent.deleted_at === 'Ativo', over: usersEvent.deleted_at === 'Encerrado'}">{{usersEvent.deleted_at}}</td>
+                    <td ng-click="manageEvent(usersEvent.id)">{{usersEvent.name}}</td>
+                    <td ng-click="manageEvent(usersEvent.id)">{{usersEvent.state}}</td>
+                    <td ng-click="manageEvent(usersEvent.id)">{{usersEvent.starts_at}}</td>
+                    <td ng-click="manageEvent(usersEvent.id)">{{usersEvent.venue}}</td>
                     <td><i ng-click="goToEdit(usersEvent.id)" class="bi bi-pencil-square" ng-class="{unableToEdit: usersEvent.deleted_at === 'Encerrado'}"></i></td>
                 </tr>
             </tbody>

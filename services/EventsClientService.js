@@ -1,5 +1,5 @@
 myApp.service("EventsClientService", function ($http) {
-    this.getPaymentMethods = () => {
+    this.listEventsClients = () => {
         return $http.get(`${baseUrl}eventsclients/`)
     }
     this.showEventsClient = (id) => {
@@ -16,5 +16,8 @@ myApp.service("EventsClientService", function ($http) {
     }
     this.deleteEventsClient = (id) => {
         return $http.delete(`${baseurl}eventsclients/${id}`)
+    }
+    this.dailySoldTickets = (event_id) => {
+        return $http.get(`${baseUrl}eventsclients/daily-tickets/${event_id}`)
     }
 })

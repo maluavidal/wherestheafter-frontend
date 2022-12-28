@@ -1,0 +1,15 @@
+<div style="height: 100%; width: 30%;">
+    <nav><img style=" object-fit: cover; height: 100%; filter: blur(0.75px); width: 30%;" class=" image"
+            src="http://localhost:3000/image/{{event.Thumb.file_name}}">
+    </nav>
+</div>
+<div style="padding: 4rem; display: flex; justify-content: space-between; width: 70%; float: right; flex-direction: column;">
+    <div style="margin-bottom: 3rem;">
+        <h2>{{event.name}}</h2>
+    </div>
+    <div style="display: flex; flex-direction: row;">
+        <div id="pie-container"
+            style="width: 550px; height: 400px; margin: 0 auto; border: solid 2px black; border-radius: 25px;"></div>
+        <div id="line-container" style="width: 550px; height: 400px; margin: 0 auto; border: solid 2px black; border-radius: 25px;"></div>
+    </div>
+</div>

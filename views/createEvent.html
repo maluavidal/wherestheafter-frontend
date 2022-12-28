@@ -6,7 +6,7 @@
             <div
                 style="display: flex; justify-content: space-between; width: 100%; padding: 2rem; border-radius: 20px; border: 1px solid black;">
                 <div style="display: flex; flex-direction: column; justify-content: space-between;">
-                    <label>Nome do evento</label>
+                    <label>Nome do evento *</label>
                     <input name="eventName" ng-model="event.name" class="form-control" type="text" style="width: 18rem;"
                         ng-max-length="16" required>
                     <span ng-show="eventInfo.eventName.$error.required && eventInfo.eventName.$dirty"
@@ -22,7 +22,7 @@
                     <input ng-model="event.min_age" class="form-control" type="number" style="width: 18rem;">
                 </div>
                 <div style="display: flex; flex-direction: column;">
-                    <label>Preço</label>
+                    <label>Preço (R$)</label>
                     <input ng-model="event.price" class="form-control" type="text" style="width: 18rem;">
                 </div>
             </div>
@@ -39,18 +39,18 @@
                         style="width: 18rem;">
                 </div>
                 <div style="display: flex; flex-direction: column;">
-                    <label>Estado</label>
+                    <label>Estado *</label>
                     <input ng-model="event.state" class="form-control" type="text" style="width: 18rem;">
                 </div>
                 <div style="display: flex; flex-direction: column;">
-                    <label>Cidade</label>
+                    <label>Cidade *</label>
                     <input ng-model="event.city" class="form-control" type="text" style="width: 18rem;">
                 </div>
             </div>
 
             <div style="display: flex; flex-direction: row; justify-content: space-between;">
                 <div style="display: flex; flex-direction: column;">
-                    <label>Local</label>
+                    <label>Local *</label>
                     <input ng-model="event.venue" class="form-control" type="text" style="width: 18rem;">
                 </div>
 
@@ -60,7 +60,7 @@
                 </div>
 
                 <div style="display: flex; flex-direction: column;">
-                    <label>Número</label>
+                    <label>Número *</label>
                     <input ng-model="event.number" class="form-control" type="text" style="width: 18rem;">
                 </div>
             </div>
@@ -71,15 +71,15 @@
             <div
                 style="display: flex; flex-direction: row; border: solid 1px black; border-radius: 20px; padding: 2rem; width: 25.5rem; justify-content: space-between;">
                 <div style="display: flex; flex-direction: column;">
-                    <label>Data (início)</label>
+                    <label>Data (início) *</label>
                     <input ng-model="event.starts_at" class="form-control" type="date"
                         style="width: 10rem; margin-bottom: 2rem">
                     <label>Data (fim)</label>
                     <input ng-model="event.ends_at" class="form-control" type="date" style="width: 10rem;">
                 </div>
                 <div style="display: flex; flex-direction: column;">
-                    <label>Hora (início)</label>
-                    <input ng-model="event.starts_at" class="form-control" type="time"
+                    <label>Hora (início) *</label>
+                    <input required ng-model="event.starts_at" class="form-control" type="time"
                         style="width: 10rem; margin-bottom: 2rem">
                     <label>Hora (fim)</label>
                     <input ng-model="event.ends_at" class="form-control" type="time" style="width: 10rem;">

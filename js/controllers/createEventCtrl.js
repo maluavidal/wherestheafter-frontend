@@ -19,9 +19,11 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
     const createEvent = () => {
         const data = {
             ...$scope.event,
-            starts_at: moment($scope.event.starts_at).format('YYYY-MM-DD'),
-            ends_at: moment($scope.event.ends_at).format('YYYY-MM-DD')
+            starts_at: moment($scope.event.starts_at).toISOString(),
+            ends_at: moment($scope.event.ends_at).toISOString()
         }
+
+        console.log(data, 'data')
 
         EventService.createEvent(data)
             .then(() => {
@@ -40,6 +42,7 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
             $scope.event.state = data.state
         }).catch(() => {
             alert('Endereço inválido.')
+            return
         })
     }
 

@@ -28,6 +28,6 @@
 
 <div class="events-grid">
     <div ng-repeat="event in events | orderBy: 'event.id'" style="display: flex; margin: auto;">
-        <img class="hover" src="http://localhost:3000/image/{{event.Thumb.file_name}}" style="width: 30vh; height: 32vh; object-fit: cover; border-radius:20px;" ng-click="refresh(event)">
+        <img class="hover" src="http://localhost:3000/image/{{event.Thumb.file_name}}" style="width: 30vh; height: 32vh; object-fit: cover; border-radius:20px; cursor: pointer;" ng-click="refresh(event)">
     </div>
 </div>
