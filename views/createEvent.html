@@ -9,7 +9,7 @@
                     <label>Nome do evento *</label>
                     <input name="eventName" ng-model="event.name" class="form-control" type="text" style="width: 18rem;"
                         ng-max-length="16" required>
-                    <span ng-show="eventInfo.eventName.$error.required && eventInfo.eventName.$dirty"
+                    <span ng-show="eventInfo.eventName.$error.required && eventInfo.eventName.$dirty || fillRequiredFields"
                         style="color: red; font-size: 11px;">Campo obrigatório *</span>
                 </div>
                 <div style="display: flex; flex-direction: column; ">
@@ -18,85 +18,118 @@
                 </div>
 
                 <div style="display: flex; flex-direction: column;">
-                    <label>Idade mínima</label>
-                    <input ng-model="event.min_age" class="form-control" type="number" style="width: 18rem;">
+                    <form name="minage">
+                        <label>Idade mínima</label>
+                        <select name="age" required class="form-control" ng-options="age for age in ages" style="width: 18vw;" ng-model="event.min_age">
+                            <option value="" >Selecione uma idade mínima</option>
+                        </select>
+                        <span ng-show="eventInfo.age.$error.required && eventInfo.age.$dirty || fillRequiredFields"
+                        style="color: red; font-size: 11px;">Campo obrigatório *</span>
+                    </form>
                 </div>
                 <div style="display: flex; flex-direction: column;">
-                    <label>Preço (R$)</label>
-                    <input ng-model="event.price" class="form-control" type="text" style="width: 18rem;">
+                    <label>Preço (R$)</label4>
+                    <input ng-model="event.price" class="form-control" type="number" style="width: 18rem;">
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <label>Quantidade de ingressos *</label>
+                    <input name="tickets" required ng-model="event.tickets_amount" class="form-control" type="number" style="width: 18rem;">
+                    <span ng-show="eventInfo.tickets.$error.required && eventInfo.tickets.$dirty || fillRequiredFields"
+                        style="color: red; font-size: 11px;">Campo obrigatório *</span>
                 </div>
             </div>
 
         </div>
     </form>
 
-    <div class="d-flex" style="gap: 3rem; font-size: 13px;">
-        <div style="border: solid 1px black; border-radius: 20px; padding: 30px; width: 100%; flex-direction: row;">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 3vh;">
-                <div style="display: flex; flex-direction: column;">
-                    <label>CEP</label>
-                    <input ng-blur="getAddressByCep()" ng-model="event.address_cep" class="form-control" type="text"
-                        style="width: 18rem;">
+    <form name="placeAndTimeInfo">
+        <div class="d-flex" style="gap: 3rem; font-size: 13px;">
+            <div style="border: solid 1px black; border-radius: 20px; padding: 30px; width: 100%; flex-direction: row;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 3vh;">
+                    <div style="display: flex; flex-direction: column;">
+                        <label>CEP</label>
+                        <input name="cepInput" required ng-blur="getAddressByCep()" ng-model="event.address_cep" class="form-control" type="text"
+                            style="width: 18rem;">
+                            <span ng-show="placeAndTimeInfo.cepInput.$error.required && placeAndTimeInfo.cepInput.$dirty || fillRequiredFields"
+                            style="color: red; font-size: 11px;">Campo obrigatório *</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <label>Estado *</label>
+                        <input name="stateInput" required ng-model="event.state" class="form-control" type="text" style="width: 18rem;">
+                        <span ng-show="placeAndTimeInfo.stateInput.$error.required && placeAndTimeInfo.stateInput.$dirty || fillRequiredFields"
+                            style="color: red; font-size: 11px;">Campo obrigatório *</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <label>Cidade *</label>
+                        <input name="cityInput" required ng-model="event.city" class="form-control" type="text" style="width: 18rem;">
+                        <span ng-show="placeAndTimeInfo.cityInput.$error.required && placeAndTimeInfo.cityInput.$dirty || fillRequiredFields"
+                            style="color: red; font-size: 11px;">Campo obrigatório *</span>
+                    </div>
                 </div>
-                <div style="display: flex; flex-direction: column;">
-                    <label>Estado *</label>
-                    <input ng-model="event.state" class="form-control" type="text" style="width: 18rem;">
+    
+                <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <div style="display: flex; flex-direction: column;">
+                        <label>Local *</label>
+                        <input name="venueInput" required ng-model="event.venue" class="form-control" type="text" style="width: 18rem;">
+                        <span ng-show="placeAndTimeInfo.venueInput.$error.required && placeAndTimeInfo.venueInput.$dirty || fillRequiredFields"
+                            style="color: red; font-size: 11px;">Campo obrigatório *</span>
+                    </div>
+    
+                    <div style="display: flex; flex-direction: column;">
+                        <label>Rua</label>
+                        <input ng-model="event.street" class="form-control" type="text" style="width: 18rem;">
+                    </div>
+    
+                    <div style="display: flex; flex-direction: column;">
+                        <label>Número</label>
+                        <input ng-model="event.number" class="form-control" type="text" style="width: 18rem;">
+                    </div>
                 </div>
-                <div style="display: flex; flex-direction: column;">
-                    <label>Cidade *</label>
-                    <input ng-model="event.city" class="form-control" type="text" style="width: 18rem;">
-                </div>
+    
             </div>
-
-            <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                <div style="display: flex; flex-direction: column;">
-                    <label>Local *</label>
-                    <input ng-model="event.venue" class="form-control" type="text" style="width: 18rem;">
+    
+            <div style="display: flex; flex-direction: row;">
+                <div
+                    style="display: flex; flex-direction: row; border: solid 1px black; border-radius: 20px; padding: 2rem; width: 25.5rem; justify-content: space-between;">
+                    <div style="display: flex; flex-direction: column;">
+                        <div style="margin-bottom: 2rem">
+                            <label>Data (início) *</label>
+                            <input name="dateInput" required ng-model="event.starts_at" class="form-control" type="date"
+                                style="width: 10rem;">
+                                <span ng-show="placeAndTimeInfo.dateInput.$error.required && placeAndTimeInfo.dateInput.$dirty || fillRequiredFields"
+                            style="color: red; font-size: 11px;">Campo obrigatório *</span>
+                        </div>
+                        <div >
+                            <label>Data (fim)</label>
+                            <input ng-model="event.ends_at" class="form-control" type="date" style="width: 10rem;">
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <div style="margin-bottom: 2rem;">
+                            <label>Hora (início) *</label>
+                            <input name="hourInput" required ng-model="event.starts_at" class="form-control" type="time"
+                                style="width: 10rem;">
+                                <span ng-show="placeAndTimeInfo.hourInput.$error.required && placeAndTimeInfo.hourInput.$dirty || fillRequiredFields"
+                            style="color: red; font-size: 11px;">Campo obrigatório *</span>
+                        </div>
+                        <label>Hora (fim)</label>
+                        <input ng-model="event.ends_at" class="form-control" type="time" style="width: 10rem;">
+                    </div>
                 </div>
-
-                <div style="display: flex; flex-direction: column;">
-                    <label>Rua</label>
-                    <input ng-model="event.street" class="form-control" type="text" style="width: 18rem;">
-                </div>
-
-                <div style="display: flex; flex-direction: column;">
-                    <label>Número *</label>
-                    <input ng-model="event.number" class="form-control" type="text" style="width: 18rem;">
-                </div>
+    
             </div>
-
         </div>
-
-        <div style="display: flex; flex-direction: row;">
-            <div
-                style="display: flex; flex-direction: row; border: solid 1px black; border-radius: 20px; padding: 2rem; width: 25.5rem; justify-content: space-between;">
-                <div style="display: flex; flex-direction: column;">
-                    <label>Data (início) *</label>
-                    <input ng-model="event.starts_at" class="form-control" type="date"
-                        style="width: 10rem; margin-bottom: 2rem">
-                    <label>Data (fim)</label>
-                    <input ng-model="event.ends_at" class="form-control" type="date" style="width: 10rem;">
-                </div>
-                <div style="display: flex; flex-direction: column;">
-                    <label>Hora (início) *</label>
-                    <input required ng-model="event.starts_at" class="form-control" type="time"
-                        style="width: 10rem; margin-bottom: 2rem">
-                    <label>Hora (fim)</label>
-                    <input ng-model="event.ends_at" class="form-control" type="time" style="width: 10rem;">
-                </div>
-            </div>
-
-        </div>
-    </div>
+    </form>
 
     <img ng-show="thumbUrl" src="{{ thumbUrl }}" style="width: 800px; height: 450px; ">
-
-    <input style="margin-top: 2rem; font-size: 13px;" class="form-control form-control-lg" type="file" id="file"
-        name="file" ngf-select onchange="angular.element(this).scope().uploadFile(this.files)">
+    <form name="imageInput">
+        <input name="image" required style="margin-top: 2rem; font-size: 13px;" class="form-control form-control-lg" type="file" id="file"
+            name="file" ngf-select onchange="angular.element(this).scope().uploadFile(this.files)">
+            <span ng-show="imageInput.image.$error.required && imageInput.image.$dirty || fillRequiredFields"
+            style="color: red; font-size: 11px;">Campo obrigatório *</span>
+        </form>
 
     <div style="margin: auto; display: flex; flex-direction: column; width: 10rem; margin-top: 3rem;">
-        <button ng-click="createEvent()" class="btn btn-primary"
-            ng-disabled="!event.name|| !event.address_cep || !event.state || !event.city || !event.venue">Criar
-            evento</button>
+        <button ng-click="createEvent()" class="btn btn-primary">Criar evento</button>
     </div>
 </div>

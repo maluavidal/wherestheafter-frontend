@@ -77,4 +77,16 @@ myApp.config(function ($stateProvider, $httpProvider) {
             templateUrl: "views/manageEvent.html",
             controller: "manageEventCtrl"
         })
+        .state({
+            name: "userProfile",
+            url: "/profile/{userId}",
+            templateUrl: "views/userProfile.html",
+            controller: "userProfileCtrl"
+        })
+        .state({
+            name: "adminPage",
+            url: "/admin",
+            template: "views/adminPage.html",
+            controller: "adminCtrl"
+        })
 })

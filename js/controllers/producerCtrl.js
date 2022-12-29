@@ -102,9 +102,17 @@ myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventServi
         $state.go('manageEvent',{
             usersEventId: id
         })
-        console.log(id);
+    }
+    
+    $scope.manageEvent = manageEvent
+    
+    
+    const goToProfile = () => {
+        const id = localStorage.getItem('user_id')
+        $state.go('userProfile', {
+            userId: id
+        })
     }
 
-    $scope.manageEvent = manageEvent
-
+    $scope.goToProfile = goToProfile
 }])

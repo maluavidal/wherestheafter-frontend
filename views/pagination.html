@@ -1,0 +1,29 @@
+<nav ng-model="page" ng-change="listFn()">
+    <ul class="pagination" ng-show="pages.length > 1">
+      <li>
+        <a class="page-link" ng-click="list(1)">
+           Primeira
+        </a>
+      </li>
+      <li>
+        <a class="page-link" ng-click="list(page - 1)">
+           Anterior
+        </a>
+      </li>
+      <li ng-repeat="page in pages" class="page-item" ng-class="{active: checkActive(page)}">
+        <a class="page-link" ng-click="list(page)">
+          {{page}}
+        </a>
+      </li>
+      <li >
+        <a class="page-link" ng-click="list(page + 1)">
+           Próxima
+        </a>
+      </li>
+      <li >
+        <a class="page-link" ng-click="list(totalPages)">
+           última
+        </a>
+      </li>
+    </ul>
+  </nav>

@@ -7,13 +7,18 @@ myApp.controller('sessionCtrl', ['$scope', '$state', 'SessionService', function 
     const login = () => {
         SessionService.createSession($scope.loginData)
             .then(resp => {
+                localStorage.setItem("user_id", resp.data.id);
                 localStorage.setItem("token", resp.data.token);
 
-                if (resp.data.admin) {
+                if (!resp.data.is_admin) {
                     localStorage.setItem("is_admin", false);
+                    $state.go(`producerPage`)
+
+                } else {
+                    localStorage.setItem("is_admin", true);
+                    $state.go('adminPage')
                 }
 
-                $state.go(`producerPage`)
             })
             .catch(async (err) => {
                 console.log(err);

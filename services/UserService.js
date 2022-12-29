@@ -9,14 +9,15 @@ myApp.service("UserService", function ($http) {
       return $http.delete(`${baseUrl}users/${id}`)
     }
   
-    this.showUser = (id) => {
-      return $http.get(`${baseUrl}users/${id}`)
+    this.showUser = () => {
+      return $http.get(`${baseUrl}users/user-profile`)
     }
   
-    this.updateUser = (UserId, data) => {
-       return $http.put(`${baseUrl}users/${UserId}`, data);
+    this.updateUser = (userId, data) => {
+       return $http.put(`${baseUrl}users/${userId}`, data);
     }
     this.profile = () => {
+      console.log('chamou a profile')
       return $http.get(`${baseUrl}users/profile`)
     }
   });

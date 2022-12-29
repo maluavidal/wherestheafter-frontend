@@ -4,29 +4,59 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
         name: "",
         about: "",
         starts_at: "",
-        ends_at: "", 
+        ends_at: "",
         min_age: "",
-        price: "",
+        price: null,
         cep: "",
         state: "",
         city: "",
-        venue: "", 
+        venue: "",
         street: "",
         number: "",
+        tickets_amount: "",
         file: null
-    };
+    }; 
 
-    const createEvent = () => {
+    $scope.fillRequiredFields = false
+
+    $scope.ages = [18, 16]
+    
+    const createEvent = () => { 
+        function addHours(date, hours) {
+            const endDate = moment(date).add(hours, 'hours')
+            return new Date(endDate);
+        }
+        
         const data = {
             ...$scope.event,
-            starts_at: moment($scope.event.starts_at).toISOString(),
-            ends_at: moment($scope.event.ends_at).toISOString()
+            starts_at: new Date($scope.event.starts_at),
+            ends_at: new Date($scope.event.ends_at),
+        }
+        
+        if (!$scope.event.name || !$scope.event.starts_at || !$scope.event.state || !$scope.event.city || !$scope.event.venue || !$scope.event.tickets_amount || !$scope.event.file) {
+            alert('Preencha os campos obrigatórios!')
+            $scope.fillRequiredFields = true
+            return
         }
 
-        console.log(data, 'data')
+        if (!$scope.event.ends_at) {
+            data.ends_at = addHours(data.starts_at, 5)
+        }
 
+        if (!$scope.event.number) {
+            $scope.event.number = 'S/N'
+        }
+
+        if (!$scope.event.price) {
+            $scope.event.price = 0
+        }
+
+        if (!$scope.event.min_age) {
+            $scope.event.min_age = 0
+        }
+        
         EventService.createEvent(data)
-            .then(() => {
+        .then(() => {
             $state.go('producerPage')
             })
             .catch((e) => {
@@ -51,9 +81,9 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
 
         return new Promise(resolve => {
             const reader = new FileReader();
-    
+
             reader.readAsDataURL(file);
-    
+
             reader.onload = () => {
                 resolve(reader.result);
             }
@@ -61,6 +91,7 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
     }
 
     const uploadFile = async files => {
+        console.log(files, 'file')
         if (!files || !files.length) return;
         const fileNoBase64 = files[0];
 
@@ -68,7 +99,7 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
 
         $timeout(() => {
             $scope.event.file = fileNoBase64;
-        }) 
+        })
     };
 
     $scope.createEvent = createEvent

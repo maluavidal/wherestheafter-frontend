@@ -15,11 +15,16 @@
 
             <div style="display: flex; flex-direction: column;">
                 <label>Idade mínima</label>
-                <input ng-model="event.min_age" class="form-control" type="number" style="width: 18rem;">
-            </div>
+                <select name="age" required class="form-control" ng-options="age for age in ages" style="width: 18rem;" ng-model="event.min_age">
+                    <option value="" >Selecione uma idade mínima</option>
+                </select>            </div>
             <div style="display: flex; flex-direction: column;">
                 <label>Preço (R$)</label>
                 <input ng-model="event.price" class="form-control" type="text" style="width: 18rem;">
+            </div>
+            <div>
+                <label>Quantidade de ingressos *</label>
+                    <input name="tickets" required ng-model="event.tickets_amount" class="form-control" type="number" style="width: 18rem;">
             </div>
         </div>
 
@@ -84,8 +89,6 @@
     </div>
 
     <img ng-show="thumbUrl" src="{{ thumbUrl }}" style="width: 800px; height: 450px; ">
-
-    <input style="margin-top: 2rem; font-size: 13px;" class="form-control form-control-lg" type="file" id="file" name="file" ngf-select onchange="angular.element(this).scope().uploadFile(this.files)">
 
     <div style="margin: auto; display: flex; flex-direction: column; width: 10rem; margin-top: 3rem;">
         <button ng-click="updateEvent(event)" class="btn btn-primary">Atualizar evento</button>
