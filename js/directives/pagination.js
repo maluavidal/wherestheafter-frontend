@@ -14,7 +14,15 @@ myApp.directive('pagination', function() {
         $scope.pages = [];
   
         $scope.list = page => {
-          if (page < 1 || page > $scope.totalPages) return 
+          if (page === 0 ) {
+            $scope.page = 1;
+            $scope.listFn($scope.page)
+            return
+          } 
+
+          if (page < 1 || page > $scope.totalPages) return
+
+          $scope.page = page;
           
           $scope.listFn(page);
         }

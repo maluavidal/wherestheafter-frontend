@@ -27,27 +27,29 @@ myApp.controller('editEventCtrl', ['$scope', '$state', 'EventService', function 
             ends_at: new Date(data.ends_at),
         };
 
-        return EventService.updateEvent(id, eventDataToUpdate)
-        .then(
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Evento atualizado com sucesso!',
-                showConfirmButton: true,
-                timer: 3000
-              }),
+        $scope.loading = true
 
-            $state.go('producerPage')
-        )
-        .catch((e) => {
-            Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: 'An error ocurred',
-                showConfirmButton: false,
-                timer: 1500
-              })
-        })    
+        return EventService.updateEvent(id, eventDataToUpdate)
+            .then(
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Evento atualizado com sucesso!',
+                    showConfirmButton: true,
+                    timer: 3000
+                }),
+
+                $state.go('producerPage')
+            )
+            .catch((e) => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'An error ocurred',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            })
     }
 
     $scope.updateEvent = updateEvent

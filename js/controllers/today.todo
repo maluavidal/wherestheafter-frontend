@@ -1,0 +1,22 @@
+TICKET SALE:
+    [] Corrigir todos os bugs
+    [] Verificar as mensagens de informação para o usuário
+    [] Verificar todas a validações dos campos
+    ✔ Menu ACESSE SUA CONTA (quando estiver logado) ir pra página dele @done(23-01-03 11:31)
+    [] Validação da imagem do evento (tanto front, quanto back-end)
+    [] Bug da data +3 do evento na listagem
+    ✔ Paginação da listagem de eventos na pagina do produtor @done(23-01-03 11:30)
+    [] Filtro por nome do evento na listagem de eventos na pagina do produtor (input text)
+    [] Filtro por data do evento na listagem de eventos na pagina do produtor 
+    [] Filtro por status do evento na listagem de eventos na pagina do produtor 
+    ✔ Ajustar layout input filtro de data da home @done(23-01-03 11:31)
+    ✔ Ajustar o bug do editar evento sem ser o OWNER @done(23-01-03 13:24)
+    [] Revisar todas as rotas com yup
+    [] Verificar as regras de segurança da API
+
+
+ROTAS PARA REVISAR COM YUP:
+    [] EVENT - STORE
+    [] EVENT - GETADDRESS
+
+    

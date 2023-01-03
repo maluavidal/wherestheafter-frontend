@@ -1,4 +1,4 @@
-myApp.controller('userCtrl', ['$scope', '$state', 'UserService', 'AlertMessage', function ($scope, $state, UserService, AlertMessage) {
+myApp.controller('registerUserCtrl', ['$scope', '$state', 'UserService', 'AlertMessage', function ($scope, $state, UserService, AlertMessage) {
 
     $scope.userData = {
         name: '',
@@ -25,6 +25,9 @@ myApp.controller('userCtrl', ['$scope', '$state', 'UserService', 'AlertMessage',
                 $state.go('loginPage');
             })
             .catch((e) => {
+                if (e.data.error.includes('Email ja existe')) {
+                    alert('Dados inválidos')
+                }
                 console.log(e)
             })
     }

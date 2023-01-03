@@ -1,26 +1,92 @@
 myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventService', 'AlertMessage', function ($scope, $state, UserService, EventService, AlertMessage) {
 
-    const profile = () => {
-        UserService.profile()
-        .then(resp => {
-                $scope.usersEvents = resp.data.map(usersEvent => {
-                    if (!usersEvent.deleted_at) {
-                        usersEvent.deleted_at = 'Ativo';
-                    } else {
-                        usersEvent.deleted_at = 'Encerrado';
-                    }
+    const init = () => {
+        profile(1)
+    }
 
-                    if (usersEvent.starts_at){
+    $scope.loading = false
+
+    // const listAllEvents = filter => {
+    //     EventService.listEvents(filter).then(resp => {
+    //         $scope.events = resp.data;
+    //     }).catch((e) => {
+    //         console.log(e);
+    //     })
+    // }
+
+    const profile = (page) => {
+        EventService.paginateList(page)
+            .then(resp => {
+                $scope.items = resp.data.totalItems
+                $scope.usersEvents = resp.data.events.map(usersEvent => {
+                    if (usersEvent.starts_at) {
                         usersEvent.starts_at = moment(usersEvent.starts_at, 'YYYY-MM-DD HH:mm:ss').format("DD/MM/YYYY HH:mm");
                     }
-                    
-                    return usersEvent;
+                    return usersEvent
                 })
+                $scope.loading = true;
             })
-        .catch((e) => {
-            console.log(e)
-        })
-    } 
+            .catch((e) => {
+                console.log(e)
+            })
+    }
+
+    const showInput = () => {
+        $scope.searching = true
+
+    }
+
+    $scope.showInput = showInput
+
+    const filtering = filter => {
+        UserService.profile(filter)
+            .then(resp => {
+                $scope.eventsToFilter = resp.data
+                console.log(resp.data);
+            }).catch((e) => {
+                console.log(e);
+            })
+    }
+
+    const searchName = () => {
+        $scope.searchingName = true
+
+        const filter = {
+            name: $scope.searchEvents
+        }
+        filtering(filter);
+    }
+
+    const searchLocation = () => {
+        const filter = {
+            city: $scope.searchLocations
+        }
+
+        // if (!filter) {
+        //     $scope.notFound = true;
+
+        filtering(filter);
+    }
+
+    const listCities = () => {
+        EventService.getCities()
+            .then(resp => {
+                $scope.locations = resp.data;
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+    }
+
+    const changeDate = () => {
+        const filter = {
+            starts_at: moment($scope.startDate).startOf('day').format('YYYY-MM-DD'),
+            ends_at: moment($scope.endDate).startOf('day').format('YYYY-MM-DD')
+        }
+        filtering(filter);
+    }
+
+    filtering()
 
     const deleteEvent = async (usersEvent) => {
         const confirmation = await Swal.fire({
@@ -32,30 +98,32 @@ myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventServi
             cancelButtonColor: '#3085d6',
             confirmButtonText: 'Excluir',
             cancelButtonText: "Cancelar",
-          });
+        });
 
-          if (confirmation.isConfirmed) {
+
+        if (confirmation.isConfirmed) {
             AlertMessage.success("Evento excluido!")
-          }
-          
-          if (!confirmation.isConfirmed) {
+            $state.reload();
+        }
+
+        if (!confirmation.isConfirmed) {
             return;
-          }
+        }
 
         return EventService.deleteEvent(usersEvent)
-        .then(() => {
-            $state.go('profile')
-        })
-        .catch((e) => {
-            Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: 'An error ocurred',
-                showConfirmButton: false,
-                timer: 1500
-              })
-        })
-    } 
+            .then(() => {
+                $state.go('profile')
+            })
+            .catch((e) => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'An error ocurred',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            })
+    }
 
     $scope.orderMethod = ''
     $scope.orderDirection = true
@@ -67,29 +135,29 @@ myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventServi
 
     $scope.inOrder = inOrder
 
-    profile()
-
     $scope.logOut = async () => {
         const confirmation = await Swal.fire({
-          title: 'Tem certeza que dejesa sair?',
-          text: "Você será desconectado de sua conta!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Sair',
-          cancelButtonText: "Cancelar",
+            title: 'Tem certeza que dejesa sair?',
+            text: "Você será desconectado de sua conta!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '##3085d6',
+            confirmButtonText: 'Sair',
+            cancelButtonText: "Cancelar",
         });
-    
+
         if (!confirmation.isConfirmed) {
-          return;
+            return;
         }
-    
+
+        localStorage.clear()
+
         $state.go('loginPage');
-      }
+    }
 
     $scope.deleteEvent = deleteEvent;
-    
+
     const goToEdit = (id) => {
         $state.go('editEvent', {
             usersEventId: id
@@ -98,15 +166,19 @@ myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventServi
 
     $scope.goToEdit = goToEdit
 
-    const manageEvent = (id) => {
-        $state.go('manageEvent',{
-            usersEventId: id
+    const manageEvent = (event) => {
+        if (event.deleted_at === 'Encerrado') {
+            return;
+        };
+
+        $state.go('manageEvent', {
+            usersEventId: event.id
         })
     }
-    
+
     $scope.manageEvent = manageEvent
-    
-    
+
+
     const goToProfile = () => {
         const id = localStorage.getItem('user_id')
         $state.go('userProfile', {
@@ -114,5 +186,15 @@ myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventServi
         })
     }
 
+    $scope.page = 1
     $scope.goToProfile = goToProfile
+    $scope.profile = profile
+    $scope.filtering = filtering
+    $scope.searchLocation = searchLocation
+    $scope.searchName = searchName
+    $scope.changeDate = changeDate
+    $scope.listCities = listCities
+
+    init()
+
 }])

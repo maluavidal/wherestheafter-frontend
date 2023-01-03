@@ -21,13 +21,13 @@
                     </div>
                     <div style="display: flex; flex-direction: column; ">
                         <label>Data de validade</label>
-                        <input name="expirationDate" required placeholder="mm/aa" class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.expiration_date"  ui-mask="99/99">
+                        <input name="expirationDate" required placeholder="mm/aa" class="form-control" type="month" style="width: 18vw;" ng-model="paymentData.expiration_date"  ui-mask="99/99">
                         <span ng-show="paymentInfo.expirationDate.$error.required && paymentInfo.expirationDate.$dirty"
                         style="color: red; font-size: 11px;">Campo obrigatório *</span>
                     </div>
                     <div style="display: flex; flex-direction: column;">
                         <label>Código de segurança</label>
-                        <input name="securityCode" required placeholder="000" class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.security_code" ui-mask="999">
+                        <input name="securityCode" required class="form-control" type="text" style="width: 18vw;" ng-model="paymentData.security_code" ui-mask="999">
                         <span ng-show="paymentInfo.securityCode.$error.required && paymentInfo.securityCode.$dirty"
                         style="color: red; font-size: 11px;">Campo obrigatório *</span>
                     </div>
@@ -44,7 +44,7 @@
                         </div>
                         <div style="display: flex; flex-direction: column; ">
                             <label>Data de nascimento</label>
-                            <input name="birthdate" required class="form-control" type="date" style="width: 18vw;" ng-model="paymentData.cardholder_birthdate">
+                            <input name="birthdate" required class="form-control" type="date" style="width: 18vw;" ng-model="paymentData.cardholder_birthdate" ng-pattern="^[^\w\d\r\n:](0?[1-9]|1[0-2])[^\w\d\r\n:](\d{4}|\d{2})">
                             <span ng-show="paymentInfo.birthdate.$error.required && paymentInfo.birthdate.$dirty"
                         style="color: red; font-size: 11px;">Campo obrigatório *</span>
                         </div>

@@ -22,6 +22,10 @@ myApp.controller('adminCtrl', ['$scope', '$state', 'UserService', 'EventService'
         })
     } 
 
+    const getEvents = () => [
+        
+    ]
+
     // const deleteEvent = async (usersEvent) => {
     //     const confirmation = await Swal.fire({
     //         title: 'Tem certeza que dejesa excluir esse evento?',

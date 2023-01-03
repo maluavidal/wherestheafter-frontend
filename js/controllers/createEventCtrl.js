@@ -15,24 +15,26 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
         number: "",
         tickets_amount: "",
         file: null
-    }; 
+    };
 
     $scope.fillRequiredFields = false
 
     $scope.ages = [18, 16]
-    
-    const createEvent = () => { 
+
+    const createEvent = () => {
         function addHours(date, hours) {
             const endDate = moment(date).add(hours, 'hours')
             return new Date(endDate);
         }
-        
+
         const data = {
             ...$scope.event,
             starts_at: new Date($scope.event.starts_at),
             ends_at: new Date($scope.event.ends_at),
         }
-        
+
+        console.log(data);
+
         if (!$scope.event.name || !$scope.event.starts_at || !$scope.event.state || !$scope.event.city || !$scope.event.venue || !$scope.event.tickets_amount || !$scope.event.file) {
             alert('Preencha os campos obrigatórios!')
             $scope.fillRequiredFields = true
@@ -54,10 +56,12 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
         if (!$scope.event.min_age) {
             $scope.event.min_age = 0
         }
-        
+
+        $scope.loading = true
+
         EventService.createEvent(data)
-        .then(() => {
-            $state.go('producerPage')
+            .then(() => {
+                $state.go('producerPage')
             })
             .catch((e) => {
                 console.log(e)
@@ -91,7 +95,6 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
     }
 
     const uploadFile = async files => {
-        console.log(files, 'file')
         if (!files || !files.length) return;
         const fileNoBase64 = files[0];
 

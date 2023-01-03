@@ -1,5 +1,5 @@
-<nav ng-model="page" ng-change="listFn()">
-    <ul class="pagination" ng-show="pages.length > 1">
+<nav style="display: flex; flex-direction: row; justify-content: center;" ng-model="page" ng-change="listFn()">
+    <ul style="cursor: pointer;" class="pagination" ng-show="pages.length > 1">
       <li>
         <a class="page-link" ng-click="list(1)">
            Primeira
@@ -22,7 +22,7 @@
       </li>
       <li >
         <a class="page-link" ng-click="list(totalPages)">
-           última
+           Última
         </a>
       </li>
     </ul>

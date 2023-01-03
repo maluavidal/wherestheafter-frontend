@@ -5,37 +5,37 @@ myApp.controller('paymentCtrl', ['$scope', '$state', 'EventsClientService', 'Pdf
 
     $scope.paymentMethods = [
         {
-            name: 'VISA', 
+            name: 'VISA',
             type: 'DÉBITO',
             value: 'visa_debito'
         },
         {
-            name: 'VISA', 
+            name: 'VISA',
             type: 'CRÉDITO',
             value: 'visa_credito'
         },
         {
-            name: 'MASTERCARD', 
+            name: 'MASTERCARD',
             type: 'DÉBITO',
             value: 'mastercard_debito'
         },
         {
-            name: 'MASTERCARD', 
+            name: 'MASTERCARD',
             type: 'CRÉDITO',
             value: 'mastercard_credito'
         },
         {
-            name: 'ELO', 
+            name: 'ELO',
             type: 'DÉBITO',
             value: 'elo_debito'
         },
         {
-            name: 'ELO', 
+            name: 'ELO',
             type: 'CRÉDITO',
             value: 'elo_credito'
         },
         {
-            name: 'PIX', 
+            name: 'PIX',
             type: 'CRÉDITO EM CONTA',
             value: 'credito_em_conta'
         },
@@ -97,30 +97,31 @@ myApp.controller('paymentCtrl', ['$scope', '$state', 'EventsClientService', 'Pdf
         }
 
         PaymentService.executePayment(clientId, eventId, $scope.paymentData)
-        .then((resp) => {
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Compra realizada com sucesso!',
-                showConfirmButton: true,
-                timer: 3000
-              })
+            .then((resp) => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Compra realizada com sucesso!',
+                    showConfirmButton: true,
+                    timer: 3000
+                })
 
-            const paymentId = resp.data.id
+                const paymentId = resp.data.id
 
-            generatePdf(paymentId).then(resp => {
-                window.open(resp.data, '_blank')
-                $state.go('home')
+                generatePdf(paymentId).then(resp => {
+                    $scope.loading = true
+                    window.open(resp.data, '_blank')
+                    $state.go('home')
+                })
+                    .catch((e) => {
+                        console.log(e);
+                    })
             })
             .catch((e) => {
                 console.log(e);
             })
-        })
-        .catch((e) => {
-            console.log(e);
-        })
     }
-    
+
     $scope.executePayment = executePayment
 
 }])

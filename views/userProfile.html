@@ -5,12 +5,12 @@
             <input ng-model="user.name" type="text" style="margin-bottom: 2rem;">
             <label>Email</label>
             <input ng-model="user.email" type="text" style="margin-bottom: 2rem;">
-            <label>Senha</label>
-            <input ng-model="user.password" type="password" style="margin-bottom: 2rem;">
+            <label>Senha atual</label>
+            <input ng-model="user.old_password" type="password" style="margin-bottom: 2rem;">
             <label>Nova senha</label>
             <input ng-model="user.password" type="password" style="margin-bottom: 2rem;">
             <div style="align-self: center;">
-                <button style="width: 5rem" type="submit">Atualizar</button>
+                <button class="btn btn-primary" style="width: 6rem; align-items: center;" type="submit" ng-click="updateUser()">Atualizar</button>
             </div>
         </div>
     </form>

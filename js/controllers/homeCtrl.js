@@ -8,6 +8,10 @@ myApp.controller('homeCtrl', ['$scope', "$state", "EventService", '$location', f
     const listAllEvents = filter => {
         EventService.listEvents(filter).then(resp => {
             $scope.events = resp.data;
+
+            if (!filter) {
+                $scope.notFound = true;
+            }
         }).catch((e) => {
             console.log(e);
         })
@@ -38,6 +42,9 @@ myApp.controller('homeCtrl', ['$scope', "$state", "EventService", '$location', f
             city: $scope.searchLocations
         }
 
+
+        console.log(filter);
+
         listAllEvents(filter);
     }
 
@@ -51,6 +58,19 @@ myApp.controller('homeCtrl', ['$scope', "$state", "EventService", '$location', f
             })
     }
 
+    const loggedIn = () => {
+        const userId = localStorage.getItem('user_id')
+
+        if (!userId) {
+            $state.go('loginPage')
+            return
+        }
+
+        $state.go('producerPage', {
+            userId: userId
+        })
+    }
+
     init()
 
     $scope.refresh = refresh;
@@ -59,5 +79,6 @@ myApp.controller('homeCtrl', ['$scope', "$state", "EventService", '$location', f
     $scope.filterLocation = filterLocation;
     $scope.listCities = listCities;
     $scope.searchName = searchName;
+    $scope.loggedIn = loggedIn;
 
 }]);

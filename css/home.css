@@ -42,3 +42,7 @@ background-color: rgb(0, 94, 255);
     width: 25vw;
     margin-bottom: 15px;
 }
+
+.page-link {
+    color: #1F1F21;
+}

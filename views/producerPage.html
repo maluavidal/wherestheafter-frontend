@@ -5,13 +5,15 @@
         <div style="display: flex; justify-content: space-between; flex-direction: row;">
             <div>
                 <h1 style="text-transform: uppercase; cursor: pointer;">meus eventos</h1>
-                <h6 style="text-transform: uppercase; margin-bottom: 2rem; cursor: pointer;" ui-sref="createEvent">criar evento <i class="bi bi-plus-circle"></i>
+                <h6 style="text-transform: uppercase; margin-bottom: 2rem; cursor: pointer;" ui-sref="createEvent">criar
+                    evento <i class="bi bi-plus-circle"></i>
                 </h6>
             </div>
             <div style="width: 8.5rem; cursor: pointer; justify-content: space-between; margin-bottom: 2rem;">
                 <div style="display: flex; justify-content: end; flex-direction: column; align-items: center;">
                     <i style="font-size: 60px;" class="bi bi-person-circle" ng-click="goToProfile()"></i>
-                    <h6 style="text-transform: uppercase; font-size: 12px; font-weight: bold;" ng-click="goToProfile()">meu perfil</h6>
+                    <h6 style="text-transform: uppercase; font-size: 12px; font-weight: bold;" ng-click="goToProfile()">
+                        meu perfil</h6>
                 </div>
             </div>
         </div>
@@ -19,20 +21,44 @@
             <thead style="font-size: 13px;">
                 <tr>
                     <th>
-                        <i class="fa-solid fa-sort" ng-click="inOrder('deleted_at')" style="cursor: pointer"></i>
-                        <span style="text-transform: uppercase;">status</span>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <div>
+                                <span style="text-transform: uppercase;"><i style="margin-right: 0.4rem; cursor: pointer;"
+                                        class="fa-solid fa-sort" ng-click="inOrder('deleted_at')"></i>status</span>
+                                <i style="color: green;" class="bi bi-circle-fill"></i>
+                                <i style="color: red;" class="bi bi-circle-fill"></i>
+                            </div>
+                            <i class="bi bi-search" style="cursor: pointer"></i>
+                        </div>
                     </th>
                     <th>
-                        <i class="fa-solid fa-sort" ng-click="inOrder('name')" style="cursor: pointer"></i>
-                        <span style="text-transform: uppercase;">evento</span>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <div>
+                                <input type="text" placeholder="Buscar eventos..." ng-model="searchEvents"
+                                    ng-change="searchName()" ng-model-options="{ debounce: 500 }" ng-show="searching">
+                                <span style="text-transform: uppercase;" ng-show="!searching"><i style="margin-right: 0.4rem; cursor: pointer;"
+                                        class="fa-solid fa-sort" ng-click="inOrder('name')"></i>evento</i></span>
+                            </div>
+                            <i class="bi bi-search" ng-click="showInput()" style="cursor: pointer;"></i>
+                        </div>
                     </th>
                     <th>
-                        <i class="fa-solid fa-sort" ng-click="inOrder('state')" style="cursor: pointer"></i>
-                        <span style="text-transform: uppercase;">estado</span>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <div>
+                                <span style="text-transform: uppercase;"><i style="margin-right: 0.4rem; cursor: pointer;"
+                                        class="fa-solid fa-sort" ng-click="inOrder('state')"></i>estado</span>
+                            </div>
+                            <i class="bi bi-search" style="cursor: pointer"></i>
+                        </div>
                     </th>
                     <th>
-                        <i class="fa-solid fa-sort" ng-click="inOrder('starts_at')" style="cursor: pointer;"></i>
-                        <span style="text-transform: uppercase;">data e hora</span>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <div>
+                                <span style="text-transform: uppercase;"><i style="margin-right: 0.4rem; cursor: pointer;"
+                                        class="fa-solid fa-sort" ng-click="inOrder('starts_at')"></i>data e hora</span>
+                            </div>
+                            <i class="bi bi-search" style="cursor: pointer;"></i>
+                        </div>
                     </th>
                     <th style="text-transform: uppercase;">espaço</th>
                     <th style="text-transform: uppercase;">editar</th>
@@ -41,25 +67,27 @@
             </thead>
             <tbody>
                 <tr ng-repeat="usersEvent in usersEvents | orderBy: orderMethod:orderDirection"
-                style="cursor: pointer;">
-                <td ng-click="manageEvent(usersEvent.id)"
-                ng-class="{ongoing: usersEvent.deleted_at === 'Ativo', over: usersEvent.deleted_at === 'Encerrado'}">
-                {{usersEvent.deleted_at}}</td>
-                <td ng-click="manageEvent(usersEvent.id)">{{usersEvent.name}}</td>
-                <td ng-click="manageEvent(usersEvent.id)">{{usersEvent.state}}</td>
-                <td ng-click="manageEvent(usersEvent.id)">{{usersEvent.starts_at}}</td>
-                <td ng-click="manageEvent(usersEvent.id)">{{usersEvent.venue}}</td>
-                <td><i ng-click="goToEdit(usersEvent.id)" class="bi bi-pencil-square"
-                    ng-class="{unableToEdit: usersEvent.deleted_at === 'Encerrado'}"></i></td>
+                    style="cursor: pointer;">
+                    <td ng-click="manageEvent(usersEvent)"
+                        ng-class="{ongoing: usersEvent.deleted_at === 'Ativo', over: usersEvent.deleted_at === 'Encerrado'}">
+                        {{usersEvent.deleted_at}}</td>
+                    <td ng-click="manageEvent(usersEvent)">{{usersEvent.name}}</td>
+                    <td ng-click="manageEvent(usersEvent)">{{usersEvent.state}}</td>
+                    <td ng-click="manageEvent(usersEvent)">{{usersEvent.starts_at}}</td>
+                    <td ng-click="manageEvent(usersEvent)">{{usersEvent.venue}}</td>
+                    <td><i ng-click="goToEdit(usersEvent.id)" class="bi bi-pencil-square"
+                            ng-class="{unableToEdit: usersEvent.deleted_at === 'Encerrado'}"></i></td>
                     <td><i ng-click="deleteEvent(usersEvent.id)" class="bi bi-x-circle"
-                        ng-show="usersEvent.deleted_at === 'Ativo'"></i></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div style="justify-content: end; display: flex;">
-                <h6
-                    style="border: solid 1px black; border-radius: 10px; padding: 5px; height: 1.5rem; text-transform: capitalize; cursor: pointer;">
-                    <i class="bi bi-box-arrow-in-right" ng-click="logOut()"> logout</i></h6>
-            </div>
+                            ng-show="usersEvent.deleted_at === 'Ativo'"></i></td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="justify-content: end; display: flex;">
+            <h6
+                style="border: solid 1px black; border-radius: 10px; padding: 5px; height: 1.5rem; text-transform: capitalize; cursor: pointer;">
+                <i class="bi bi-box-arrow-in-right" ng-click="logOut()"> logout</i>
+            </h6>
         </div>
+        <pagination ng-if="loading" total-items="items" items-per-page="2" list-fn="profile" page="page"></pagination>
     </div>
+</div>

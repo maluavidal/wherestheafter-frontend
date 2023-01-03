@@ -13,11 +13,10 @@ myApp.service("UserService", function ($http) {
       return $http.get(`${baseUrl}users/user-profile`)
     }
   
-    this.updateUser = (userId, data) => {
-       return $http.put(`${baseUrl}users/${userId}`, data);
+    this.updateUser = (data) => {
+       return $http.put(`${baseUrl}users/`, data);
     }
-    this.profile = () => {
-      console.log('chamou a profile')
-      return $http.get(`${baseUrl}users/profile`)
+    this.profile = (name, city, date) => {
+      return $http.get(`${baseUrl}users/profile?name=${name}city=${city}date${date}`);
     }
   });

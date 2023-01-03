@@ -1,10 +1,23 @@
-myApp.controller('sessionCtrl', ['$scope', '$state', 'SessionService', function ($scope, $state, SessionService) {
+myApp.controller('sessionCtrl', ['$scope', '$state', 'SessionService', 'UserService', '$window', function ($scope, $state, SessionService, UserService, $window) {
+
+
+    const getUser = () => {
+        const id = $window.localStorage.getItem('user_id')
+        UserService.showUser(id)
+            .then(resp => {
+                $scope.user = resp.data
+            })
+    }
+
+    getUser()
+
     $scope.loginData = {
         email: '',
         password: ''
     }
 
     const login = () => {
+        console.log($scope.loginData);
         SessionService.createSession($scope.loginData)
             .then(resp => {
                 localStorage.setItem("user_id", resp.data.id);
