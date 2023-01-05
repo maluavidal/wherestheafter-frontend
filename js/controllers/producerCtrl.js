@@ -1,92 +1,62 @@
 myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventService', 'AlertMessage', function ($scope, $state, UserService, EventService, AlertMessage) {
+    $scope.searchText = '';
+    $scope.status = null;
+    $scope.loading = false;
+    $scope.totalItems;
 
     const init = () => {
-        profile(1)
+        searchProfileEvents(1)
     }
 
-    $scope.loading = false
-
-    // const listAllEvents = filter => {
-    //     EventService.listEvents(filter).then(resp => {
-    //         $scope.events = resp.data;
-    //     }).catch((e) => {
-    //         console.log(e);
-    //     })
-    // }
-
-    const profile = (page) => {
-        EventService.paginateList(page)
-            .then(resp => {
-                $scope.items = resp.data.totalItems
-                $scope.usersEvents = resp.data.events.map(usersEvent => {
-                    if (usersEvent.starts_at) {
-                        usersEvent.starts_at = moment(usersEvent.starts_at, 'YYYY-MM-DD HH:mm:ss').format("DD/MM/YYYY HH:mm");
-                    }
-                    return usersEvent
-                })
-                $scope.loading = true;
-            })
-            .catch((e) => {
-                console.log(e)
-            })
-    }
-
-    const showInput = () => {
-        $scope.searching = true
-
-    }
-
-    $scope.showInput = showInput
-
-    const filtering = filter => {
-        UserService.profile(filter)
-            .then(resp => {
-                $scope.eventsToFilter = resp.data
-                console.log(resp.data);
-            }).catch((e) => {
-                console.log(e);
-            })
-    }
-
-    const searchName = () => {
-        $scope.searchingName = true
-
-        const filter = {
-            name: $scope.searchEvents
+    $scope.statusTypes = [
+        {
+            name: 'Aberto',
+            value: 'ongoing'
+        },
+        {
+            name: 'Encerrado',
+            value: 'over'
         }
-        filtering(filter);
-    }
+    ]
 
-    const searchLocation = () => {
+    const searchProfileEvents = page => {
+        
+        $scope.page = page || $scope.page;
+        
         const filter = {
-            city: $scope.searchLocations
+            page: $scope.page,
+            search_text: $scope.searchText,
+            start_date: $scope.startDate,
+            end_date: $scope.endDate,
+            status: $scope.status
         }
+        
+        EventService.paginateList(filter)
+        .then(resp => {
+            if (page === 1) {
+                $scope.totalItems = resp.data.totalItems;
+            }
 
-        // if (!filter) {
-        //     $scope.notFound = true;
-
-        filtering(filter);
+            $scope.loading = true;
+            
+            const now = moment();
+            
+            $scope.usersEvents = resp.data.events.map(usersEvent => {
+                if (moment(usersEvent.ends_at).isBefore(now)) {
+                    $scope.active = false
+                    usersEvent.status = 'Encerrado'
+                } else {
+                    $scope.active = true
+                    usersEvent.status = 'Aberto'
+                }
+                return usersEvent
+            });
+            
+        })
+        .catch((e) => {
+            console.log(e)
+        })
     }
-
-    const listCities = () => {
-        EventService.getCities()
-            .then(resp => {
-                $scope.locations = resp.data;
-            })
-            .catch((e) => {
-                console.log(e)
-            })
-    }
-
-    const changeDate = () => {
-        const filter = {
-            starts_at: moment($scope.startDate).startOf('day').format('YYYY-MM-DD'),
-            ends_at: moment($scope.endDate).startOf('day').format('YYYY-MM-DD')
-        }
-        filtering(filter);
-    }
-
-    filtering()
 
     const deleteEvent = async (usersEvent) => {
         const confirmation = await Swal.fire({
@@ -167,7 +137,7 @@ myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventServi
     $scope.goToEdit = goToEdit
 
     const manageEvent = (event) => {
-        if (event.deleted_at === 'Encerrado') {
+        if (event.status === 'over') {
             return;
         };
 
@@ -178,7 +148,6 @@ myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventServi
 
     $scope.manageEvent = manageEvent
 
-
     const goToProfile = () => {
         const id = localStorage.getItem('user_id')
         $state.go('userProfile', {
@@ -186,15 +155,9 @@ myApp.controller('producerCtrl', ['$scope', '$state', 'UserService', 'EventServi
         })
     }
 
+    init();
+
     $scope.page = 1
     $scope.goToProfile = goToProfile
-    $scope.profile = profile
-    $scope.filtering = filtering
-    $scope.searchLocation = searchLocation
-    $scope.searchName = searchName
-    $scope.changeDate = changeDate
-    $scope.listCities = listCities
-
-    init()
-
+    $scope.searchProfileEvents = searchProfileEvents
 }])

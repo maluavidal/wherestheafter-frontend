@@ -124,7 +124,7 @@
     <img ng-show="thumbUrl" src="{{ thumbUrl }}" style="width: 800px; height: 450px; ">
     <form name="imageInput">
         <input name="image" required style="margin-top: 2rem; font-size: 13px;" class="form-control form-control-lg" type="file" id="file"
-            name="file" ngf-select onchange="angular.element(this).scope().uploadFile(this.files)">
+            name="file" ngf-select onchange="angular.element(this).scope().uploadFile(this.files)" accept=".png, .jpg, .jpeg">
             <span ng-show="imageInput.image.$error.required && imageInput.image.$dirty || fillRequiredFields"
             style="color: red; font-size: 11px;">Campo obrigatório *</span>
         </form>

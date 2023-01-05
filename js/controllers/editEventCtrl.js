@@ -12,6 +12,7 @@ myApp.controller('editEventCtrl', ['$scope', '$state', 'EventService', function 
                     starts_at: new Date(resp.data.starts_at),
                     ends_at: new Date(resp.data.ends_at),
                 }
+                console.log(resp.data);
             })
             .catch((e) => {
                 console.log(e);

@@ -16,7 +16,7 @@ myApp.service("UserService", function ($http) {
     this.updateUser = (data) => {
        return $http.put(`${baseUrl}users/`, data);
     }
-    this.profile = (name, city, date) => {
-      return $http.get(`${baseUrl}users/profile?name=${name}city=${city}date${date}`);
+    this.profile = (filter) => {
+      return $http.get(`${baseUrl}users/profile`, { params: filter });
     }
   });

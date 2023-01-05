@@ -33,8 +33,8 @@ myApp.service("EventService", function ($http) {
   this.getAddress = (data) => {
     return $http.get(`${baseUrl}events/cep`, {params: {cep: data}});
   }
-  this.paginateList = (meta) => {
-    return $http.get(`${baseUrl}events?page=${meta}`)
+  this.paginateList = params => {
+    return $http.get(`${baseUrl}events`, { params })
   }
   
 });

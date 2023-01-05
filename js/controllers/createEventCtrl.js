@@ -57,6 +57,10 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
             $scope.event.min_age = 0
         }
 
+        if ($scope.event.ends_at > new Date) {
+            $scope.status = 'ongoing'
+        }
+
         $scope.loading = true
 
         EventService.createEvent(data)
@@ -105,7 +109,7 @@ myApp.controller('createEventCtrl', ['$scope', '$timeout', '$state', 'EventServi
         })
     };
 
-    $scope.createEvent = createEvent
+    $scope.createEvent = createEvent;
     $scope.uploadFile = uploadFile;
     $scope.getAddressByCep = getAddressByCep;
 }])

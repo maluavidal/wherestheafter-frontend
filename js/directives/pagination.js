@@ -8,11 +8,10 @@ myApp.directive('pagination', function() {
         page: "=",
         itemsPerPage: "=",
       },
-      
       controller: ["$scope", function ($scope) {
         $scope.totalPages = Math.ceil(~~$scope.totalItems / $scope.itemsPerPage);
         $scope.pages = [];
-  
+        
         $scope.list = page => {
           if (page === 0 ) {
             $scope.page = 1;
@@ -35,8 +34,8 @@ myApp.directive('pagination', function() {
           if (page === $scope.page) return true;
           return false
         }
+
+        // console.log($scope.list());
       }]
-  
     }
-  
   });

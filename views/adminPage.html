@@ -40,7 +40,7 @@
                 <tr ng-repeat="usersEvent in usersEvents | orderBy: orderMethod:orderDirection"
                     style="cursor: pointer;">
                     <td ng-click="manageEvent(usersEvent.id)"
-                        ng-class="{ongoing: usersEvent.deleted_at === 'Ativo', over: usersEvent.deleted_at === 'Encerrado'}">
+                        ng-class="{ongoing: usersEvent.deleted_at === 'Aberto', over: usersEvent.deleted_at === 'Encerrado'}">
                         {{usersEvent.deleted_at}}</td>
                     <td ng-click="manageEvent(usersEvent.id)">{{usersEvent.name}}</td>
                     <td ng-click="manageEvent(usersEvent.id)">{{usersEvent.state}}</td>
@@ -49,7 +49,7 @@
                     <td><i ng-click="goToEdit(usersEvent.id)" class="bi bi-pencil-square"
                             ng-class="{unableToEdit: usersEvent.deleted_at === 'Encerrado'}"></i></td>
                     <td><i ng-click="deleteEvent(usersEvent.id)" class="bi bi-x-circle"
-                            ng-show="usersEvent.deleted_at === 'Ativo'"></i></td>
+                            ng-show="usersEvent.deleted_at === 'Aberto'"></i></td>
                 </tr>
             </tbody>
         </table>

@@ -5,7 +5,7 @@ myApp.controller('adminCtrl', ['$scope', '$state', 'UserService', 'EventService'
         .then(resp => {
                 $scope.usersEvents = resp.data.map(usersEvent => {
                     if (!usersEvent.deleted_at) {
-                        usersEvent.deleted_at = 'Ativo';
+                        usersEvent.deleted_at = 'Aberto';
                     } else {
                         usersEvent.deleted_at = 'Encerrado';
                     }
